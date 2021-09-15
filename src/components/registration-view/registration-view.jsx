@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import "./registration-view.scss";
 
 export function RegistrationView(props) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [birthdate, setBirthdate] = useState('');
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [birthdate, setBirthdate] = useState("");
 
-    const handleRegister = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         console.log(username, password, email, birthdate);
         props.onRegistration(username);

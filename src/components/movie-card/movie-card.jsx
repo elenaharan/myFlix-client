@@ -8,9 +8,8 @@ export class MovieCard extends React.Component {
         const { movie, onMovieClick } = this.props;
         //Adding onClick attribute to React element MovieCard
         //And passing function as props
-        return (
-        <div className="movie-card" onClick={() => onMovieClick(movie)}>{movie.Title}</div>
-        );
+        return
+        <div onClick={() => onMovieClick(movie)} className="movie-card">{movie.Title}</div>;
     }
 }
 
@@ -20,21 +19,8 @@ MovieCard.PropTypes = {
         //may contain a Title
         Title: PropTypes.string.isRequired,
         Description: PropTypes.string.isRequired,
-        Genre: PropTypes.shape({
-            Name: PropTypes.string.isRequired,
-            Description: PropTypes.string.isRequired
-        }),
-        Director: PropTypes.shape({
-            Name: PropTypes.string.isRequired,
-            Bio: PropTypes.string.isRequired,
-            Birth: PropTypes.string
-        }),
-        ImagePath: PropTypes.string.isRequired,
-        Featured: PropTypes.bool.isRequired        
+        ImagePath: PropTypes.string.isRequired,        
     }).isRequired,
     //must contain onMovieClick and it must be a function
     onMovieClick: PropTypes.func.isRequired
 };
-
-
-

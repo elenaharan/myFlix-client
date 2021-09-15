@@ -9,14 +9,15 @@ import { RegistrationView } from '../registration-view/registration-view';
 
 import "./main-view.scss";
 
-class MainView extends React.Component {
+export class MainView extends React.Component {
     constructor(){
         super();
         this.state = {
             movies: [],
             selectedMovie: null, //This tells the app no movie cards were clicked
-            user: null
-        };
+            user: null,
+            register:null
+        }
     }
 
     componentDidMount() {
@@ -38,48 +39,43 @@ class MainView extends React.Component {
         });
     }
 
-    onRegistration(register) {
-        this.setState({
-            register,
-        });
-    }
-
-//When a user successfully logs in, this function updates `user` property in state to that particular user
+    //When a user successfully logs in, this function updates `user` property in state to that particular user
     onLoggedIn(user) {
         this.setState({
             user,
         });
     }
+
+    onRegistration(register) {
+        this.setState({
+            register,
+        });
+    }
     
     render() {
-        const { movies, selectedMovie, user, register } = this.state;
+        const { movies, selectedMovie } = this.state;
         
+        /*If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView */
+        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+
+        //Before the movies have been loaded
+        if (movies.length === 0) return <div className="main-view" />;
+
         if (!register)
           return (
               <RegistrationView onRegistration={(register) => this.onRegistration(register)} />
           );
 
-        /*If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView */
-        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-        
-        //Before the movies have been loaded
-        if (movies.length === 0) return <div className="main-view" />;
-        
         return (
             <div className="main-view">
                 {/*If the state of `selectedMovie` is not null, that selected movie will be returned; otherwise, all movies will be returned*/}
                 {selectedMovie 
                 ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie);}}/>
                 : movies.map(movie => (
-                <MovieCard key ={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
+                <MovieCard key ={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(movie) }} />
                 ))
                 }
             </div>
         );
     }
 }
-
-export default MainView;
-
-
-
