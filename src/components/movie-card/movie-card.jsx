@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import "./movie-card.scss";
 
-export class MovieCard extends React.Component {
+export default class MovieCard extends React.Component {
     render() {
         const { movie, onMovieClick } = this.props;
         //Adding onClick attribute to React element MovieCard
