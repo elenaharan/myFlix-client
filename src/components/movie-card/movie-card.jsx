@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 import "./movie-card.scss";
 
@@ -8,19 +8,20 @@ export default class MovieCard extends React.Component {
         const { movie, onMovieClick } = this.props;
         //Adding onClick attribute to React element MovieCard
         //And passing function as props
-        return
-        <div onClick={() => onMovieClick(movie)} className="movie-card">{movie.Title}</div>;
+        return <div className="movie-card" onClick={() => { onMovieClick(movie); }}>{movie.Title}</div>;
     }
 }
+            
+      
 
-MovieCard.PropTypes = {
+MovieCard.propTypes = {
     //the props object must include a movie object (shape({...}))
-    movie: PropTypes.shape({
+    movie: propTypes.shape({
         //may contain a Title
-        Title: PropTypes.string.isRequired,
-        Description: PropTypes.string.isRequired,
-        ImagePath: PropTypes.string.isRequired,        
+        Title: propTypes.string.isRequired,
+        Description: propTypes.string.isRequired,
+        //ImagePath: propTypes.string.isRequired,        
     }).isRequired,
     //must contain onMovieClick and it must be a function
-    onMovieClick: PropTypes.func.isRequired
+    onMovieClick: propTypes.func.isRequired
 };

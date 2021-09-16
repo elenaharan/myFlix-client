@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 import "./login-view.scss";
 
@@ -30,10 +30,10 @@ export function LoginView(props) {
     );
 }
 
-LoginView.PropTypes = {
-    Login: PropTypes.shape({
-        Username: PropTypes.string.isRequired,
-        Password: PropTypes.string.isRequired
+LoginView.propTypes = {
+    Login: propTypes.shape({
+        Username: propTypes.string.isRequired,
+        Password: propTypes.string.isRequired
     }),
-    onLoggedIn: PropTypes.func.isRequired
+    onLoggedIn: propTypes.func.isRequired
 };
