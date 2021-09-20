@@ -18,6 +18,7 @@ export function LoginView(props) {
     };
 
     return (
+        
         <Form>
           <Form.Group controlId="formUsername">
             <Form.Label>Username: </Form.Label>
@@ -31,7 +32,8 @@ export function LoginView(props) {
           <Button variant="primary" type="submit" onClick={handleSubmit}>
           Login
           </Button>
-        </Form>  
+        </Form> 
+        
     );
 }
 
