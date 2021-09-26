@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
+import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -19,22 +20,22 @@ export function RegistrationView(props) {
 
     return (
       <Form>
-        <Form.Group controlId="formUsername">
+        <Form.Group controlid="formUsername">
           <Form.Label>Username: </Form.Label>
           <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
         </Form.Group>
 
-        <Form.Group controlId="formPassword">
+        <Form.Group controlid="formPassword">
           <Form.Label>Password: </Form.Label>
           <Form.Control type="text" onChange={e => setPassword(e.target.value)} />
         </Form.Group>
 
-        <Form.Group ControlId="formEmail">
+        <Form.Group Controlid="formEmail">
           <Form.Label>Email: </Form.Label>
           <Form.Control type="email" onChange={e => setEmail(e.target.value)} />
         </Form.Group>
 
-        <Form.Group controlId="formBirthdate">
+        <Form.Group controlid="formBirthdate">
           <Form.Label>Birthdate: </Form.Label>
           <Form.Control type="date" onChange={(e) => setBirthdate(e.target.value)} />
           </Form.Group>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import propTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
+import { Link } from 'react-router-dom';
 import "./login-view.scss";
 
 export function LoginView(props) {
@@ -12,28 +13,42 @@ export function LoginView(props) {
     const handleSubmit = (e) => {
         //This method prevents the default refresh of the page from handleSubmit() method
         e.preventDefault();
-        console.log(username, password);
-        //Allows user to be automatically logged in - regardless, of whether or not they have the correct credentials
-        props.onLoggedIn(username);
+        //Send a request to the server for authentication
+        axios.post('https://movietemple.herokuapp.com/login', {
+            Username: username,
+            Password: password
+        })
+        .then(response => {
+            const data = response.data;
+            props.onLoggedIn(data);
+        })
+        .catch(e => {
+            console.log('no such user')
+        });
     };
 
     return (
-        
+      <div className="login">  
         <Form>
-          <Form.Group controlId="formUsername">
+          <Form.Group controlid="formUsername">
             <Form.Label>Username: </Form.Label>
-              <Form.Control type="text" placeholder="username" onChange={e => setUsername(e.target.value)}/>
+              <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)}/>
           </Form.Group>
 
-          <Form.Group controlId="formPassword">
+          <Form.Group controlid="formPassword">
              <Form.Label>Password: </Form.Label>
-               <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+               <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <span>
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
           Login
-          </Button>
+            </Button>
+            <Link to={`/register`}>
+              <Button variant="success link">Register</Button>
+            </Link>
+          </span>
         </Form> 
-        
+      </div>  
     );
 }
 
