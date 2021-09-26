@@ -1,9 +1,37 @@
 .my-flix {
   color: steelblue;
 }
+.main-view {
+  text-align: center;
+  color: #324851;
+  background-color: #F1F1F2;
+}
+Form {
+  max-width: 50%;
+  padding-top: 100px;
+  padding-left: 20%;
+}
+.card-image {
+  width: 300px;
+  height: 350px;
+}
 
+.card {
+  height: 100%;
+  justify-content: space-around;
+}
 
+.button {
+  position: absolute;
+  bottom: 0;
+  center: 0;
+}
+.movie-poster {
+  justify-content: center;
+}
 
-
+.movie-title {
+  justify-content: center;
+}
 
 /*# sourceMappingURL=index.caa67093.css.map */
