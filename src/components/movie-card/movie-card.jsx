@@ -36,8 +36,6 @@ MovieCard.propTypes = {
         //may contain a Title
         Title: propTypes.string.isRequired,
         Description: propTypes.string.isRequired,
-        Imagepath: propTypes.string.isRequired,        
-    }).isRequired,
-    //must contain onMovieClick and it must be a function
-    onMovieClick: propTypes.func.isRequired
+        Imagepath: propTypes.string.isRequired,      
+    }).isRequired,    
 };

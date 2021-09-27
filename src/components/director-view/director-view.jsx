@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
 
 
 
@@ -25,7 +26,7 @@ export class DirectorView extends React.Component {
 }
 
 DirectorView.propTypes = {
-    Director: propTypes.shape({
+    director: propTypes.shape({
         Name: propTypes.string.isRequired,
         Bio: propTypes.string.isRequired,
         Birth: propTypes.string.isRequired

@@ -3,16 +3,37 @@ import propTypes from "prop-types";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { DirectorView  } from "../director-view/director-view";
-
+import axios from 'axios';
 
 
 
 export class MovieView extends React.Component {
-    constructor() {
-        super();
-        this.state = {};
-    }
+    keypressCallback(event) {
+        console.log(event.key);
+      }
+    
+      componentDidMount() {
+        document.addEventListener('keypress', this.keypressCallback);
+      }
+    
+      componentWillUnmount() {
+        document.removeEventListener('keypress', this.keypressCallback);
+      }
+    
+      addFavorite() {
+        const token = localStorage.getItem('token');
+        const username = localStorage.getItem('user');
+    
+        axios.post(`https://movietemple.herokuapp.com/users/${username}/movies/${this.props.movie._id}`, {}, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+          .then(response => {
+            alert(`Added to Favorites List`)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
 
     render() {
         const { movie, onBackClick } = this.props;        
@@ -59,13 +80,10 @@ MovieView.propTypes = {
         Description: propTypes.string.isRequired,
         Imagepath: propTypes.string.isRequired,
         Genre: propTypes.shape({
-            Name: propTypes.string.isRequired,
-            Description: propTypes.string.isRequired
+            Name: propTypes.string.isRequired
         }),
         Director: propTypes.shape({
-            Name: propTypes.string.isRequired,
-            Bio: propTypes.string.isRequired,
-            Birth: propTypes.string.isRequired
+            Name: propTypes.string.isRequired
         }),
     }).isRequired
 };
