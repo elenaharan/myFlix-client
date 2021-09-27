@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import "./login-view.scss";
+import { Row } from 'react-bootstrap';
 
 export function LoginView(props) {
     const [ username, setUsername ] = useState('');
@@ -30,23 +31,35 @@ export function LoginView(props) {
     return (
       <div className="login">  
         <Form>
+          <Row>
           <Form.Group controlid="formUsername">
             <Form.Label>Username: </Form.Label>
               <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)}/>
           </Form.Group>
+          </Row>
 
+          <Row>
           <Form.Group controlid="formPassword">
              <Form.Label>Password: </Form.Label>
                <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
           </Form.Group>
-          <span>
+          </Row>
+
+          <Row>
             <Button variant="primary" type="submit" onClick={handleSubmit}>
           Login
             </Button>
-            <Link to={`/register`}>
+          </Row>
+
+          <Row>
+          {'Haven\'t got an account?'}
+        </Row>
+
+          <Row>
+            <Link to="/register">
               <Button variant="success link">Register</Button>
             </Link>
-          </span>
+          </Row>
         </Form> 
       </div>  
     );
