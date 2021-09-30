@@ -4,36 +4,38 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import "./movie-view.scss";
 
 
 
 export class MovieView extends React.Component {
-    keypressCallback(event) {
-        console.log(event.key);
-      }
+  handleAdd() {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    axios.post(`https://movietemple.herokuapp.com/users/:Username/movies/:MovieID` +
+      this.props.movie._id, {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((response) => {
+        console.log(response);
+        alert(this.props.movie.Title + " has been added to your favorites!");
+      })
+  }
+
+  handleRemove() {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    axios.delete(`https://movietemple.herokuapp.com/users/:Username/movies/:MovieID` +
+      this.props.movie._id, {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((response) => {
+        console.log(response);
+        alert(movie.Title + " has been removed from your favorites!");
+      })
+  }
     
-      componentDidMount() {
-        document.addEventListener('keypress', this.keypressCallback);
-      }
-    
-      componentWillUnmount() {
-        document.removeEventListener('keypress', this.keypressCallback);
-      }
-    
-      addFavorite() {
-        const token = localStorage.getItem('token');
-        const username = localStorage.getItem('user');
-    
-        axios.post(`https://movietemple.herokuapp.com/users/${username}/movies/${this.props.movie._id}`, {}, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-          .then(response => {
-            alert(`Added to Favorites List`)
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      };
+      
 
     render() {
         const { movie, onBackClick } = this.props;        
@@ -60,10 +62,21 @@ export class MovieView extends React.Component {
                       <Button variant="link">{movie.Genre.Name}</Button>
                     </Link>  
                 </Row>
-                            
+         
                 <Row className="movie-director justify-content-center">Directed by &nbsp;</Row>
-                <Row className="value justify-content-center"> <Link to={`/directors/${movie.Director.Name}`}><Button variant="link">{movie.Director.Name}</Button></Link></Row>
-              
+                <Row className="justify-content-center"> <Link to={`/directors/${movie.Director.Name}`}><Button variant="link">{movie.Director.Name}</Button></Link></Row>
+                <Button className="back-button" variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
+                <Row>
+                <Link to={`/movies/${movie.Title}`}>
+            <Button block type="button" variant="success" onClick={() => this.handleAdd(movie)}>Add to favorites</Button>
+          </Link>
+                </Row>
+
+                <Row>
+                <Link to={`/movies/${movie.Title}`}>
+            <Button block type="button" variant="danger" onClick={() => this.handleRemove(movie)}>Remove from favorites</Button>
+          </Link>
+                </Row>
 
 
 

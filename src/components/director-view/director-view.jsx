@@ -1,8 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
+import "./director-view.scss";
 
 
 
@@ -11,16 +11,17 @@ import Row from 'react-bootstrap/Row';
 export class DirectorView extends React.Component {
 
     render() {
-        const {movie, onBackClick } = this.props;
+        const {movie, onBackClick, director } = this.props;
+        
 
         return (
-            <Card className="director-view">
-                <Row className="director-name">{movie.Director.Name}</Row>
-                <Row className="director-bio">{movie.Director.Bio}</Row>
-                <Row className="director-birth">{movie.Director.Birth}</Row>
-                <Row> <Button variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
+            <div className="director-view">
+                <Row className="director-name justify-content-center"><h3>{director.Name}</h3></Row>
+                <Row className="director-bio justify-content-center">{director.Bio}</Row>
+                <Row className="director-birth justify-content-center">Born in {director.Birth}</Row>
+                <Row> <Button className="back-button justify-content-center" variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
                 </Row>
-            </Card>
+            </div>
         );
     }
 }
@@ -32,3 +33,4 @@ DirectorView.propTypes = {
         Birth: propTypes.string.isRequired
     }).isRequired
 };
+

@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 
 import { Link } from 'react-router-dom';
 
@@ -14,7 +15,7 @@ export default class MovieCard extends React.Component {
         //Adding onClick attribute to React element MovieCard
         //And passing function as props
         return (
-            <Card className="card" style= {{width: '18rem'}} xs={8} md={4}>
+            <Card className="card" xs={8} md={4}>
                 <Card.Img className="card-image" variant="top" src={movie.Imagepath} />
                 <Card.Body className="card-body">
                     <Card.Title>{movie.Title}</Card.Title>

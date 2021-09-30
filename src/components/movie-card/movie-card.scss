@@ -4,17 +4,27 @@
   }
 
   .card {
-    
+    width: 110%;
     height: 100%;
-    justify-content: space-around;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    
 
   }
 
   .button {
     position: absolute;
-    bottom: 0;
-    center: 0;
+    bottom: 0px;
+    
   }
+
+  
+
+  .card-image {
+    height: 250px;
+  }
+
+  
 
   
   

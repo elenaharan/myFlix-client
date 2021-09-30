@@ -9,11 +9,15 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
+//import { Navbar} from '../navbar/navbar';
 
 //Importing React-Bootstrap Components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+
 
 
 //Importing React-router-dom components
@@ -116,7 +120,18 @@ export class MainView extends React.Component {
 
         return (
           <Router>
-        
+          <Row> 
+            <Container>
+              <Navbar expand="lg" variant="light" bg="light">
+              <Navbar.Brand href="/">MovieTemple</Navbar.Brand>
+              <Navbar.Brand href="/profile">Profile</Navbar.Brand>
+              <button onClick={() => { this.onLoggedOut() }}>Logout</button>
+
+    </Navbar>
+  </Container>
+
+            
+          </Row>
           <Row className="main-view justify-content-md-center">
             {/* Endpoint "/" */}
             <Route exact path="/" render={() => {
@@ -191,7 +206,7 @@ export class MainView extends React.Component {
                 if (movies.length === 0) return;
                 return <ProfileView history={history} movies={movies} />
             }} />
-
+            
           </Row>
         </Router>
       );
