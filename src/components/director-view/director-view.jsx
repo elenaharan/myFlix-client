@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import "./director-view.scss";
-
+import {default as MovieCard} from '../movie-card/movie-card';
 
 
 
@@ -11,8 +11,8 @@ import "./director-view.scss";
 export class DirectorView extends React.Component {
 
     render() {
-        const {movie, onBackClick, director } = this.props;
-        
+        const {movies, onBackClick, director } = this.props;
+        console.log("movies", movies)
 
         return (
             <div className="director-view">
@@ -21,6 +21,7 @@ export class DirectorView extends React.Component {
                 <Row className="director-birth justify-content-center">Born in {director.Birth}</Row>
                 <Row> <Button className="back-button justify-content-center" variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
                 </Row>
+                <MovieCard movie={movie} />
             </div>
         );
     }

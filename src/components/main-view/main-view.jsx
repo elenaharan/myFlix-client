@@ -124,7 +124,7 @@ export class MainView extends React.Component {
             <Container>
               <Navbar expand="lg" variant="light" bg="light">
               <Navbar.Brand href="/">MovieTemple</Navbar.Brand>
-              <Navbar.Brand href="/profile">Profile</Navbar.Brand>
+              <Navbar.Brand href="/users/profile/:Username">Profile</Navbar.Brand>
               <button onClick={() => { this.onLoggedOut() }}>Logout</button>
 
     </Navbar>
@@ -157,9 +157,9 @@ export class MainView extends React.Component {
               }} />
 
 
-            {/*Endpoint "/profile" */} 
-              <Route path="/profile" render={() => {
-                  if(!user) return <Col>
+            {/*Endpoint "/users/profile/:Username" */} 
+              <Route path="/users/profile/:Username" render={() => {
+                  return <Col>
                     <ProfileView />
                   </Col>
               }} />
@@ -179,12 +179,17 @@ export class MainView extends React.Component {
 
               {/*Endpoint "/directors/:name*/}
               <Route path="/directors/:name" render={({ match, history }) => {
+                
                   if (!user) return <Col>
                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                     </Col>
                   if (movies.length === 0) return <div className = "main-view" />;
+                  const directorMovies = movies.filter((movie) => {
+                    return movie.Director.Name === match.params.name;
+                  })  
+                  
                   return <Col md={8}>
-                      <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
+                      <DirectorView movies={directorMovies} director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
                     </Col>
               }
             } />

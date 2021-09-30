@@ -19,16 +19,17 @@ export class ProfileView extends React.Component {
     }
 
     componentDidMount() {
-        const accessToken = localStorage.getItem('token');
-        if (accessToken !== null) {
+        let accessToken = localStorage.getItem('token');
             this.getUser(accessToken);
         }
-    }
+    
 
     //GET user
     getUser(token) {
-        const username = localStorage.getItem('user');
-        axios.get("https://movietemple.herokuapp.com/users/profile/:Username", {
+
+        let url = "https://movietemple.herokuapp.com/users/profile/" + localStorage.getItem('user');
+        
+        axios.get(url, {
             headers: {Authorization: `Bearer ${token}`},
         })
         .then((response) => {
@@ -36,19 +37,28 @@ export class ProfileView extends React.Component {
                 Username: response.data.Username,
                 Password: response.data.Password,
                 Email: response.data.Email,
-                Birthdate: response.data.Birthdate,
-                Favorites: response.data.Favorites,
+                FavoriteMovies: response.data.FavoriteMovies,
             });
-        })
-        .catch(function (error) {
-            console.log(error);
         });
     }
 
     render() {
+        const { movies, user } = this.props;
+        //const favoritesList = movies.filter(m => {
+          //  return this.state.FavoriteMovies.includes(m._id);
+          //});
        
       return(
-          console.log("Welcome!")
+        <Container className="profile-wrapper m-4">
+        <Row>
+          <Col>
+            <h2>Username: {`${this.props.user}`}</h2>
+            <p>Email: {`${this.state.Email}`}</p>
+            <p>Birthdate: {`${this.state.Birthdate}`}</p>
+            <h5 className="mt-5">Your Favorites</h5>
+          </Col>
+        </Row>
+        </Container>
       )
 
     }

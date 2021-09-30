@@ -11,7 +11,9 @@ import "./movie-card.scss";
 
 export default class MovieCard extends React.Component {
     render() {
+        console.log("this.props", this.props);
         const { movie } = this.props;
+        
         //Adding onClick attribute to React element MovieCard
         //And passing function as props
         return (
