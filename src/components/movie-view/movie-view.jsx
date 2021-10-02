@@ -65,7 +65,6 @@ export class MovieView extends React.Component {
          
                 <Row className="movie-director justify-content-center">Directed by &nbsp;</Row>
                 <Row className="justify-content-center"> <Link to={`/directors/${movie.Director.Name}`}><Button variant="link">{movie.Director.Name}</Button></Link></Row>
-                <Button className="back-button" variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
                 <Row>
                 <Link to={`/movies/${movie.Title}`}>
             <Button block type="button" variant="success" onClick={() => this.handleAdd(movie)}>Add to favorites</Button>

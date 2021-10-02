@@ -4,14 +4,17 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 import './genre-view.scss';
+import {default as MovieCard} from '../movie-card/movie-card';
 
 
 
 export class GenreView extends React.Component {
     
     render() {  
-      const { movies, movie, genre, onBackClick } = this.props;
-      //const otherMovies = movies.filter(m => movie.Genre.Name === genre.Name);
+      const { genre, movies } = this.props;
+      //const otherGenreMovies = movies.find(m => m.Genre.Name === match.params.Name);
+
+      console.log("genre", genre);
       
       
 
@@ -23,11 +26,15 @@ export class GenreView extends React.Component {
 
           <Row className="genre-description">{genre.Description}</Row>
 
-          <Button className="back-button" variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
+          <Row className="other-movies justify-content-center"><h4>Other Movies in this Genre</h4></Row>
+
+          {/*<Row>
+          
+            <MovieCard />
+          </Row>*/}         
+          
       
-          {/*<Row className="other-movies">
-              {otherMovies.map((m, i) => <Link to={`/movies/${movie.Title}`} key={i}>{movie.Title}</Link>)}
-      </Row>*/}
+         
         </div>
     );
   }

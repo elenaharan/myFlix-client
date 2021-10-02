@@ -58,18 +58,21 @@ Form {
   margin-bottom: 0px;
 }
 
-.director-name {
-  margin: 20px;
-}
-
 .director-bio {
   margin: 40px;
   line-height: 30px;
 }
 
-.back-button {
-  margin: 40px;
-  background-color: black;
+.other-movies {
+  padding-top: 100px;
+}
+
+.card-director {
+  width: 10px;
+}
+
+.movieCard-wrapper {
+  width: 50%;
 }
 .genre-name {
   margin: 20px;

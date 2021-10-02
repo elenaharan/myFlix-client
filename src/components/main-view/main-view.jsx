@@ -184,7 +184,7 @@ export class MainView extends React.Component {
                     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                     </Col>
                   if (movies.length === 0) return <div className = "main-view" />;
-                  const directorMovies = movies.filter((movie) => {
+                  const directorMovies = movies.find((movie) => {
                     return movie.Director.Name === match.params.name;
                   })  
                   
