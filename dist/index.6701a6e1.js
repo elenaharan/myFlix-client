@@ -23203,9 +23203,13 @@ class MainView extends _reactDefault.default.Component {
                                 if (movies.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     className: "main-view"
                                 }));
+                                const genreMovies = movies.find((movie)=>{
+                                    return movie.Genre.Name === match.params.name;
+                                });
                                 return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                     md: 8,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_genreView.GenreView, {
+                                        movies: genreMovies,
                                         genre: movies.find((m)=>m.Genre.Name === match.params.name
                                         ).Genre,
                                         onBackClick: ()=>history.goBack()
@@ -23233,7 +23237,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 209
+                                lineNumber: 212
                             },
                             __self: this
                         })
@@ -40660,8 +40664,7 @@ var _movieCardDefault = parcelHelpers.interopDefault(_movieCard);
 class GenreView extends _reactDefault.default.Component {
     render() {
         const { genre , movies  } = this.props;
-        //const otherGenreMovies = movies.find(m => m.Genre.Name === match.params.Name);
-        console.log("genre", genre);
+        console.log("movies", movies);
         return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "genre-view",
             __source: {
@@ -40709,6 +40712,22 @@ class GenreView extends _reactDefault.default.Component {
                         },
                         __self: this,
                         children: "Other Movies in this Genre"
+                    })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "genre-card",
+                    __source: {
+                        fileName: "src/components/genre-view/genre-view.jsx",
+                        lineNumber: 31
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCardDefault.default, {
+                        movie: movies,
+                        __source: {
+                            fileName: "src/components/genre-view/genre-view.jsx",
+                            lineNumber: 33
+                        },
+                        __self: this
                     })
                 })
             ]

@@ -200,8 +200,11 @@ export class MainView extends React.Component {
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                 </Col>
                 if(movies.length === 0) return <div className="main-view" />;
+                const genreMovies = movies.find((movie) => {
+                  return movie.Genre.Name === match.params.name;
+                })
                 return <Col md={8}>
-                    <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
+                    <GenreView movies={genreMovies} genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
                 </Col>
             }} />
 

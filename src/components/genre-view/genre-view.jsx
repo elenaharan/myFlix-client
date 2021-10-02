@@ -12,9 +12,9 @@ export class GenreView extends React.Component {
     
     render() {  
       const { genre, movies } = this.props;
-      //const otherGenreMovies = movies.find(m => m.Genre.Name === match.params.Name);
+      
 
-      console.log("genre", genre);
+      console.log("movies", movies);
       
       
 
@@ -28,10 +28,10 @@ export class GenreView extends React.Component {
 
           <Row className="other-movies justify-content-center"><h4>Other Movies in this Genre</h4></Row>
 
-          {/*<Row>
+          <Row className="genre-card">
           
-            <MovieCard />
-          </Row>*/}         
+            <MovieCard  movie={movies}/>
+          </Row>       
           
       
          
