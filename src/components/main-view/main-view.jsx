@@ -9,6 +9,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
+import { UpdateView } from '../update-view/update-view';
 
 
 //Importing React-Bootstrap Components
@@ -17,6 +18,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
 
 
 
@@ -125,7 +127,7 @@ export class MainView extends React.Component {
             <Container>
               <Navbar expand="lg" variant="light" bg="light">
               <Navbar.Brand href="/">MovieTemple</Navbar.Brand>
-              <Navbar.Brand href="/users/profile/:Username">Profile</Navbar.Brand>
+              <Navbar.Brand href={`/users/profile/${user}`}>Profile</Navbar.Brand>
               <button onClick={() => { this.onLoggedOut() }}>Logout</button>
 
               </Navbar>
@@ -164,9 +166,9 @@ export class MainView extends React.Component {
               }} />
 
 
-            {/*Profile View*/}
+            {/*Profile View/ Get a Single User Info*/}
             {/*Endpoint "/users/profile/:Username" */} 
-              <Route path="/users/profile/:Username" render={({ match, history}) => {
+              <Route path="/users/profile/:username" render={({ match, history}) => {
                 if (!user) return <Col>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                 </Col>
@@ -204,11 +206,7 @@ export class MainView extends React.Component {
                   return <Col md={8}>
                     <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
                     </Col>
-              }} />
-
-
-
-              
+              }} />         
 
 
 
@@ -228,7 +226,7 @@ export class MainView extends React.Component {
             }} />
 
 
-            {/*Endpoint "users/update/:Username"} */}
+            {/*Update User Information */}
             <Route path="/users/update/:Username" render={({history}) => {
               if(!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />

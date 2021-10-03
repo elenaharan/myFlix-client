@@ -57,10 +57,10 @@ export function RegistrationView(props) {
         isValid = false;
       }
 
-      if (!username.isAlphanumeric) {
+      /*if (!username.isAlphanumeric) {
         usernameError.usernameNonAlphanumeric = "Username must not contain non-alphanumeric characters";
         isValid = false;
-      }
+      }*/
 
       if (password.trim().length < 5) {
         passwordError.passwordShort = "Password needs to be at least 5 characters long.";
@@ -161,5 +161,4 @@ RegistrationView.propTypes = {
         Email: propTypes.string.isRequired,
         Birthdate: propTypes.string.isRequired
     }),
-    onRegistration: propTypes.func.isRequired,
 };

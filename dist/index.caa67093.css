@@ -90,5 +90,14 @@ Form {
 .genre-card {
   width: 35%;
 }
+.button {
+  justify-content: center;
+}
 
+.header-favourites {
+  margin: 40px;
+}
+.update-header {
+  margin: 0px;
+}
 /*# sourceMappingURL=index.caa67093.css.map */

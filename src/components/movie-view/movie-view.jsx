@@ -38,7 +38,7 @@ export class MovieView extends React.Component {
       
 
     render() {
-        const { movie, onBackClick } = this.props;        
+        const { movie, user, onBackClick } = this.props;        
 
         return (
             <div className="movie-view">
@@ -67,7 +67,7 @@ export class MovieView extends React.Component {
                 <Row className="justify-content-center"> <Link to={`/directors/${movie.Director.Name}`}><Button variant="link">{movie.Director.Name}</Button></Link></Row>
                 
                 <Row>
-                <Link to={`/movies/${movie.Title}`}>
+                <Link to={"/users/profile/:Username"}>
             <Button block type="button" variant="success" onClick={() => this.handleAdd(movie)}>Add to favorites</Button>
           </Link>
                 </Row>

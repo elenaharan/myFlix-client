@@ -1,4 +1,4 @@
-/*import React, { useState } from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
@@ -83,10 +83,10 @@ export class UpdateView extends React.Component {
           EmailError.emailNotEmail = "Enter email in correct format";
           isValid = false;
         }*/
-        {/*if (this.state.Birthdate === '' || !this.state.Birthdate ) {
+        /*if (this.state.Birthdate === '' || !this.state.Birthdate ) {
           BirthdateError.BirthdateEmpty = "Please enter your date of birth.";
           isValid = false;
-        }*/}
+        }*/
         /*this.setState({
           PasswordError: PasswordError,
           EmailError: EmailError,
@@ -235,4 +235,4 @@ setBirthdate(input) {
 }
 
 
-  } */
+  } */}

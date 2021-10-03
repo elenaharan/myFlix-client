@@ -1,6 +1,8 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import propTypes from 'prop-types';
@@ -30,15 +32,16 @@ export class ProfileView extends React.Component {
    //GET user
     getUser(token) {
       
-      let url = `https://movietemple.herokuapp.com/users/profile/${username}`;
+      let url = `https://movietemple.herokuapp.com/users/profile/${user}`;
       
       axios.get(url, {headers: {Authorization: `Bearer ${token}`},
         })
         .then((response) => {
             this.setState({
-                Username: response.data.Username,
+                Username: user,
                 Password: response.data.Password,
                 Email: response.data.Email,
+                Birthdate: response.data.Birthdate,
                 FavoriteMovies: response.data.FavoriteMovies,
                 
             }); 
@@ -71,10 +74,10 @@ export class ProfileView extends React.Component {
 
 
     /*Deregister a user*/
-  /*handleDelete() {
+  handleDelete() {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    axios.delete(`https://movietemple.herokuapp.com/users/${username}`, { headers: { Authorization: `Bearer ${token}`}}
+    axios.delete(`https://movietemple.herokuapp.com/users/${user}`, { headers: { Authorization: `Bearer ${token}`}}
   )
   .then(() => {
     alert("Account has been deleted");
@@ -85,12 +88,12 @@ export class ProfileView extends React.Component {
   .catch(function (error) {
     console.log(error);
   });
-}*/
+}
 
   render() {
     
-    const { user } = this.props;
-    console.log("user", user);
+    const { user, username } = this.props;
+    console.log("this.state", this.state);
      //const favoritesList = movies.filter(m => {
           //  return this.state.FavoriteMovies.includes(m._id);
           //});
@@ -101,12 +104,21 @@ export class ProfileView extends React.Component {
         <Card className="card" xs={8} md={4}>
                 <Card.Body className="card-body">
                     <Card.Title>Profile Information </Card.Title>
-                    <Card.Text>Username: {user} </Card.Text>
-                    <Card.Text>Password: </Card.Text>
-                    <Card.Text>Email: </Card.Text>
-                    <Card.Text>Birthdate: </Card.Text>     
+                    <Card.Text>Username: {`${this.state.Username}`} </Card.Text>
+                    <Card.Text>Password: {`${this.state.Password}`}</Card.Text>
+                    <Card.Text>Email: {`${this.state.Email}`}</Card.Text>
+                    <Card.Text>Birthdate: {`${this.state.Birthdate}`}</Card.Text> 
+                    <Link to={"/users/update/:Username"}>
+                      <Button className="button-update" variant="link">Update Profile</Button>
+                    </Link>
+
+                    <Link to={`/users/${user}`}>
+                      <Button className="button-deregister" user={username} variant="link" onClick={() => {this.handleDelete()}}>Deregister</Button>
+                    </Link>    
                 </Card.Body>
             </Card>
+            <Row className="header-favourites justify-content-center"><h4>My Favourite Films</h4></Row>
+
 
          
         {/*<Row>
