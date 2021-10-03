@@ -9,7 +9,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
-//import { Navbar} from '../navbar/navbar';
+
 
 //Importing React-Bootstrap Components
 import Row from 'react-bootstrap/Row';
@@ -17,6 +17,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+
 
 
 
@@ -127,12 +128,16 @@ export class MainView extends React.Component {
               <Navbar.Brand href="/users/profile/:Username">Profile</Navbar.Brand>
               <button onClick={() => { this.onLoggedOut() }}>Logout</button>
 
-    </Navbar>
-  </Container>
-
-            
+              </Navbar>
+              </Container>
           </Row>
+
+
+
+          
           <Row className="main-view justify-content-md-center">
+          {/*Endpoints*/}
+
             {/* Endpoint "/" */}
             <Route exact path="/" render={() => {
               if (!user) return <Col>
@@ -148,6 +153,8 @@ export class MainView extends React.Component {
               }} />
 
 
+
+
             {/*Endpoint "/register" */}
               <Route path="/register" render={() => {
                   if (user) return <Redirect to="/" />
@@ -157,9 +164,10 @@ export class MainView extends React.Component {
               }} />
 
 
+            {/*Profile View*/}
             {/*Endpoint "/users/profile/:Username" */} 
               <Route path="/users/profile/:Username" render={() => {
-                  return <Col>
+                  if (!user) return <Col>
                     <ProfileView />
                   </Col>
               }} />
@@ -176,6 +184,8 @@ export class MainView extends React.Component {
                     <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
                     </Col>
               }} />
+
+
 
               {/*Endpoint "/directors/:name*/}
               <Route path="/directors/:name" render={({ match, history }) => {
@@ -194,6 +204,9 @@ export class MainView extends React.Component {
               }
             } />
 
+
+
+
             {/*Endpoint "/genres/:name" */}
             <Route path="/genres/:name" render={({ match, history}) => {
                 if(!user) return <Col>
@@ -207,6 +220,23 @@ export class MainView extends React.Component {
                     <GenreView movies={genreMovies} genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
                 </Col>
             }} />
+
+
+            {/*Endpoint "users/update/:Username"} */}
+            <Route path="/users/update/:Username" render={({history}) => {
+              if(!user) return <Col>
+              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
+            
+              return <Col>
+                  <UpdateView user={user} movies={movies} onBackClick={() => history.goBack()}/>
+                  </Col>
+          }}
+             />
+
+
+
+
 
             {/*Endpoint "/users/:username" */}
             <Route exact path="/users/:username" render={({ history }) => {

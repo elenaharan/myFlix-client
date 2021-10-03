@@ -125,7 +125,7 @@ export function RegistrationView(props) {
 
         <Row>
         <Form.Group controlid="formBirthdate">
-          <Form.Label>Birthdate: </Form.Label>
+          <Form.Label>Birthday: </Form.Label>
           <Form.Control type="date" onChange={(e) => setBirthdate(e.target.value)} />
           {Object.keys(birthdateError).map((key) => {
             return (
