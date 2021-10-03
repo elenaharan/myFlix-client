@@ -76,9 +76,33 @@ handleUpdate() {
     const { user } = this.props;
      return (
        <Container>
-       <Form>
-         <Row className="form-title justify-content-center"><h4>Please enter your account information</h4></Row>
-       </Form>
+         <Row className="form-title justify-content-center"><h4>Update your account information</h4></Row>
+         <Form>
+         <Form.Group controlid="formUsername">
+          <Form.Label>Username: </Form.Label>
+          <Form.Control type="text" placeholder="Username"></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlid="formPassword">
+          <Form.Label>Password: </Form.Label>
+          <Form.Control type="text" placeholder="Password"></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlid="formEmail">
+          <Form.Label>Email: </Form.Label>
+          <Form.Control type="text" placeholder="Email"></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlid="formBirthdate">
+          <Form.Label>Birthdate: </Form.Label>
+          <Form.Control type="date" placeholder="Email"></Form.Control>
+        </Form.Group>
+
+        <Row>
+        <Button variant="secondary" type="update" onClick={this.handleUpdate}> Update </Button>
+        </Row>
+
+         </Form>
        </Container>
      );
   }

@@ -41103,35 +41103,165 @@ class UpdateView extends _reactDefault.default.Component {
     }
     render() {
         const { user  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/update-view/update-view.jsx",
                 lineNumber: 78
             },
             __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form, {
-                __source: {
-                    fileName: "src/components/update-view/update-view.jsx",
-                    lineNumber: 79
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     className: "form-title justify-content-center",
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 80
+                        lineNumber: 79
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/update-view/update-view.jsx",
-                            lineNumber: 80
+                            lineNumber: 79
                         },
                         __self: this,
-                        children: "Please enter your account information"
+                        children: "Update your account information"
                     })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
+                    __source: {
+                        fileName: "src/components/update-view/update-view.jsx",
+                        lineNumber: 80
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                            controlid: "formUsername",
+                            __source: {
+                                fileName: "src/components/update-view/update-view.jsx",
+                                lineNumber: 81
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                    __source: {
+                                        fileName: "src/components/update-view/update-view.jsx",
+                                        lineNumber: 82
+                                    },
+                                    __self: this,
+                                    children: "Username: "
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                    type: "text",
+                                    placeholder: "Username",
+                                    __source: {
+                                        fileName: "src/components/update-view/update-view.jsx",
+                                        lineNumber: 83
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                            controlid: "formPassword",
+                            __source: {
+                                fileName: "src/components/update-view/update-view.jsx",
+                                lineNumber: 86
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                    __source: {
+                                        fileName: "src/components/update-view/update-view.jsx",
+                                        lineNumber: 87
+                                    },
+                                    __self: this,
+                                    children: "Password: "
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                    type: "text",
+                                    placeholder: "Password",
+                                    __source: {
+                                        fileName: "src/components/update-view/update-view.jsx",
+                                        lineNumber: 88
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                            controlid: "formEmail",
+                            __source: {
+                                fileName: "src/components/update-view/update-view.jsx",
+                                lineNumber: 91
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                    __source: {
+                                        fileName: "src/components/update-view/update-view.jsx",
+                                        lineNumber: 92
+                                    },
+                                    __self: this,
+                                    children: "Email: "
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                    type: "text",
+                                    placeholder: "Email",
+                                    __source: {
+                                        fileName: "src/components/update-view/update-view.jsx",
+                                        lineNumber: 93
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                            controlid: "formBirthdate",
+                            __source: {
+                                fileName: "src/components/update-view/update-view.jsx",
+                                lineNumber: 96
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                    __source: {
+                                        fileName: "src/components/update-view/update-view.jsx",
+                                        lineNumber: 97
+                                    },
+                                    __self: this,
+                                    children: "Birthdate: "
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                    type: "date",
+                                    placeholder: "Email",
+                                    __source: {
+                                        fileName: "src/components/update-view/update-view.jsx",
+                                        lineNumber: 98
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                            __source: {
+                                fileName: "src/components/update-view/update-view.jsx",
+                                lineNumber: 101
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                variant: "secondary",
+                                type: "update",
+                                onClick: this.handleUpdate,
+                                __source: {
+                                    fileName: "src/components/update-view/update-view.jsx",
+                                    lineNumber: 102
+                                },
+                                __self: this,
+                                children: " Update "
+                            })
+                        })
+                    ]
                 })
-            })
+            ]
         }));
     }
 }
