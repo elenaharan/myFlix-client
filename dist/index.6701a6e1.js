@@ -40879,7 +40879,7 @@ class ProfileView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_containerDefault.default, {
             __source: {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 102
+                lineNumber: 107
             },
             __self: this,
             children: [
@@ -40889,21 +40889,21 @@ class ProfileView extends _reactDefault.default.Component {
                     md: 4,
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 104
+                        lineNumber: 109
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
                         className: "card-body",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 105
+                            lineNumber: 110
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 106
+                                    lineNumber: 111
                                 },
                                 __self: this,
                                 children: "Profile Information "
@@ -40911,7 +40911,7 @@ class ProfileView extends _reactDefault.default.Component {
                             /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 107
+                                    lineNumber: 112
                                 },
                                 __self: this,
                                 children: [
@@ -40923,7 +40923,7 @@ class ProfileView extends _reactDefault.default.Component {
                             /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 108
+                                    lineNumber: 113
                                 },
                                 __self: this,
                                 children: [
@@ -40934,7 +40934,7 @@ class ProfileView extends _reactDefault.default.Component {
                             /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 109
+                                    lineNumber: 114
                                 },
                                 __self: this,
                                 children: [
@@ -40945,7 +40945,7 @@ class ProfileView extends _reactDefault.default.Component {
                             /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 110
+                                    lineNumber: 115
                                 },
                                 __self: this,
                                 children: [
@@ -40954,18 +40954,20 @@ class ProfileView extends _reactDefault.default.Component {
                                 ]
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: "/users/update/:Username",
+                                to: `/users/update/${user}`,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 111
+                                    lineNumber: 116
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                                     className: "button-update",
                                     variant: "link",
+                                    onClick: ()=>{
+                                    },
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 112
+                                        lineNumber: 117
                                     },
                                     __self: this,
                                     children: "Update Profile"
@@ -40975,7 +40977,7 @@ class ProfileView extends _reactDefault.default.Component {
                                 to: `/users/${user}`,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 115
+                                    lineNumber: 120
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
@@ -40987,7 +40989,7 @@ class ProfileView extends _reactDefault.default.Component {
                                     },
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 116
+                                        lineNumber: 121
                                     },
                                     __self: this,
                                     children: "Deregister"
@@ -41000,13 +41002,13 @@ class ProfileView extends _reactDefault.default.Component {
                     className: "header-favourites justify-content-center",
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 120
+                        lineNumber: 125
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 120
+                            lineNumber: 125
                         },
                         __self: this,
                         children: "My Favourite Films"
@@ -41033,18 +41035,14 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "UpdateView", ()=>UpdateView
 );
+var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-var _form = require("react-bootstrap/Form");
-var _formDefault = parcelHelpers.interopDefault(_form);
-var _button = require("react-bootstrap/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
-var _row = require("react-bootstrap/Row");
-var _rowDefault = parcelHelpers.interopDefault(_row);
 var _reactRouterDom = require("react-router-dom");
 var _updateViewScss = require("./update-view.scss");
 class UpdateView extends _reactDefault.default.Component {
@@ -41054,30 +41052,87 @@ class UpdateView extends _reactDefault.default.Component {
             Username: "",
             Password: "",
             Email: "",
-            Birthdate: "",
-            PasswordError: "",
-            EmailError: "",
-            BirthdateError: ""
+            Birthday: ""
         };
     }
     componentDidMount() {
-        let accessToken = localStorage.getItem("token");
-        this.getUser(accessToken);
+        let accessToken = localStorage.getItem('token');
+        let username = localStorage.getItem('user');
     }
+    //GET user
     getUser(token) {
-        const username = localStorage.getItem('user');
-        _axiosDefault.default.get('https://movietemple.herokuapp.com/users/', {
+        let url = `https://movietemple.herokuapp.com/users/profile/${user}`;
+        _axiosDefault.default.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
             this.setState({
-                Username: response.data.Username,
+                Username: user,
                 Password: response.data.Password,
                 Email: response.data.Email,
-                Birthdate: response.data.Birthdate
+                Birthdate: response.data.Birthdate,
+                FavoriteMovies: response.data.FavoriteMovies
             });
+        }).catch(function(error) {
+            console.log(error);
         });
+    }
+    /* Handle form update */ handleUpdate() {
+        let token = localStorage.getItem("token");
+        let user = localStorage.getItem("user");
+        _axiosDefault.default.put(`https://movietemple.herokuapp.com/users/update/${user}`, {
+            Username: this.state.Username,
+            Password: this.state.Password,
+            Email: this.state.Email,
+            Birthday: this.state.Birthday
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            const data = response.data;
+            console.log(data);
+            alert("Your account information has been updated.");
+            console.log(response);
+            window.location.pathname = `{/users/${user}`;
+        }).catch(function(error) {
+            alert(error.response.data);
+            console.log("Error upon update");
+        });
+    }
+    render() {
+        const { user  } = this.props;
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
+            __source: {
+                fileName: "src/components/update-view/update-view.jsx",
+                lineNumber: 78
+            },
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form, {
+                __source: {
+                    fileName: "src/components/update-view/update-view.jsx",
+                    lineNumber: 79
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                    className: "form-title justify-content-center",
+                    __source: {
+                        fileName: "src/components/update-view/update-view.jsx",
+                        lineNumber: 80
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
+                        __source: {
+                            fileName: "src/components/update-view/update-view.jsx",
+                            lineNumber: 80
+                        },
+                        __self: this,
+                        children: "Please enter your account information"
+                    })
+                })
+            })
+        }));
     }
 }
 
@@ -41086,6 +41141,6 @@ class UpdateView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"6TuXu","prop-types":"1tgq3","axios":"iYoWk","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","react-bootstrap/Row":"c0x1x","react-router-dom":"cpyQW","./update-view.scss":"kVYLP","@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7XgTt"}],"kVYLP":[function() {},{}]},["g0Qq3","BnZU4","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react":"6TuXu","react-bootstrap":"h2YVd","prop-types":"1tgq3","axios":"iYoWk","react-router-dom":"cpyQW","./update-view.scss":"kVYLP","@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7XgTt","react/jsx-runtime":"8xIwr"}],"kVYLP":[function() {},{}]},["g0Qq3","BnZU4","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map

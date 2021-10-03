@@ -53,6 +53,11 @@ export class ProfileView extends React.Component {
 
 
 
+
+    
+
+
+
     /*Remove from Favourites*/
 
     /*handleRemove(movie) {
@@ -108,8 +113,8 @@ export class ProfileView extends React.Component {
                     <Card.Text>Password: {`${this.state.Password}`}</Card.Text>
                     <Card.Text>Email: {`${this.state.Email}`}</Card.Text>
                     <Card.Text>Birthdate: {`${this.state.Birthdate}`}</Card.Text> 
-                    <Link to={"/users/update/:Username"}>
-                      <Button className="button-update" variant="link">Update Profile</Button>
+                    <Link to={`/users/update/${user}`}>
+                      <Button className="button-update" variant="link" onClick={() => {}}>Update Profile</Button>
                     </Link>
 
                     <Link to={`/users/${user}`}>
