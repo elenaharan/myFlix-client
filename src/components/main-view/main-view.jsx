@@ -166,12 +166,32 @@ export class MainView extends React.Component {
 
             {/*Profile View*/}
             {/*Endpoint "/users/profile/:Username" */} 
-              <Route path="/users/profile/:Username" render={() => {
-                  return <Col>
+              <Route path="/users/profile/:Username" render={({ match, history}) => {
+                if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                </Col>
+                if (movies.length === 0) return <div className = "main-view" />;
+                  return <Col md={8}>
                   <ProfileView user = {user} />
                   </Col>
                 }
               } />
+
+              {/*Endpoint "/directors/:name*/}
+              <Route path="/directors/:name" render={({ match, history }) => {
+                
+                if (!user) return <Col>
+                  <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                  </Col>
+                if (movies.length === 0) return <div className = "main-view" />;
+                const directorMovies = movies.find((movie) => {
+                  return movie.Director.Name === match.params.name;
+                })  
+                return <Col md={8}>
+                    <DirectorView movies={directorMovies} director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
+                  </Col>
+            }
+          } />
 
 
 
@@ -188,22 +208,7 @@ export class MainView extends React.Component {
 
 
 
-              {/*Endpoint "/directors/:name*/}
-              <Route path="/directors/:name" render={({ match, history }) => {
-                
-                  if (!user) return <Col>
-                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                    </Col>
-                  if (movies.length === 0) return <div className = "main-view" />;
-                  const directorMovies = movies.find((movie) => {
-                    return movie.Director.Name === match.params.name;
-                  })  
-                  
-                  return <Col md={8}>
-                      <DirectorView movies={directorMovies} director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
-                    </Col>
-              }
-            } />
+              
 
 
 
