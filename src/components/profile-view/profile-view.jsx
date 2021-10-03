@@ -1,9 +1,10 @@
 import React from 'react';
-import {Row, Form, Col, Container, Button, Card} from 'react-bootstrap';
-import propTypes, { string } from 'prop-types';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import propTypes from 'prop-types';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-//import { UpdateView } from '../update-view/update-view';
 import './profile-view.scss';
 
 
@@ -12,10 +13,10 @@ export class ProfileView extends React.Component {
         super();
 
         this.state = {
-          Username: null,
-          Password: null,
-          Email: null,
-          Birthdate: null,
+          Username: '',
+          Password: '',
+          Email: '',
+          Birthdate: '',
           FavoriteMovies: [],
         };
     }
@@ -26,7 +27,7 @@ export class ProfileView extends React.Component {
       }
     
 
-    //GET user
+   //GET user
     getUser(token) {
       
       let url = `https://movietemple.herokuapp.com/users/profile/${username}`;
@@ -87,24 +88,33 @@ export class ProfileView extends React.Component {
 }*/
 
   render() {
+    console.log("this.props", this.props);
     const { user } = this.props;
      //const favoritesList = movies.filter(m => {
           //  return this.state.FavoriteMovies.includes(m._id);
           //});
        
       return (
-        <Container>
-        <Row>
-        <h4>Profile Information</h4>
-        </Row>
+      <Container>
+
+        <Card className="card" xs={8} md={4}>
+                <Card.Body className="card-body">
+                    <Card.Title>Profile Information </Card.Title>
+                    <Card.Text>Username: {user} </Card.Text>
+                    <Card.Text>Password: </Card.Text>
+                    <Card.Text>Email: </Card.Text>
+                    <Card.Text>Birthdate: </Card.Text>     
+                </Card.Body>
+            </Card>
+
          
-        <Row>
+        {/*<Row>
           <Col>
             <p>Username: {`${this.props.user}`}</p>
             <p>Email: {`${this.state.Email}`}</p>
             <p>Birthdate: {`${this.state.Birthdate}`}</p>
           </Col>
-        </Row>
+        </Row>*/}
 
         </Container>
 

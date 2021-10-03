@@ -167,10 +167,11 @@ export class MainView extends React.Component {
             {/*Profile View*/}
             {/*Endpoint "/users/profile/:Username" */} 
               <Route path="/users/profile/:Username" render={() => {
-                  if (!user) return <Col>
-                    <ProfileView />
+                  return <Col>
+                  <ProfileView user = {user} />
                   </Col>
-              }} />
+                }
+              } />
 
 
 
