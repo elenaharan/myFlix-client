@@ -22915,6 +22915,8 @@ var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
 var _profileView = require("../profile-view/profile-view");
 var _updateView = require("../update-view/update-view");
+var _jwtDecode = require("jwt-decode");
+var _jwtDecodeDefault = parcelHelpers.interopDefault(_jwtDecode);
 //Importing React-Bootstrap Components
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
@@ -22941,7 +22943,7 @@ class MainView extends _reactDefault.default.Component {
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
             this.setState({
-                user: localStorage.getItem('user')
+                user: _jwtDecodeDefault.default(accessToken)
             });
             this.getMovies(accessToken);
         }
@@ -23285,7 +23287,7 @@ exports.default = MainView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","./main-view.scss":"jyMAr","@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7XgTt","../login-view/login-view":"054li","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","../registration-view/registration-view":"aP2YV","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-router-dom":"cpyQW","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../profile-view/profile-view":"2E7Aw","react-bootstrap/Button":"9CzHT","react-bootstrap/Container":"2PRIq","react-bootstrap/Navbar":"eYZQl","../update-view/update-view":"8jXgg"}],"iYoWk":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","./main-view.scss":"jyMAr","@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7XgTt","../login-view/login-view":"054li","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","../registration-view/registration-view":"aP2YV","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-router-dom":"cpyQW","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../profile-view/profile-view":"2E7Aw","react-bootstrap/Button":"9CzHT","react-bootstrap/Container":"2PRIq","react-bootstrap/Navbar":"eYZQl","../update-view/update-view":"8jXgg","jwt-decode":"cmbwR"}],"iYoWk":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"3QmO2"}],"3QmO2":[function(require,module,exports) {
@@ -40916,7 +40918,7 @@ class ProfileView extends _reactDefault.default.Component {
                                 __self: this,
                                 children: [
                                     "Username: ",
-                                    `${this.state.Username}`,
+                                    `${user.Username}`,
                                     " "
                                 ]
                             }),
@@ -40928,7 +40930,7 @@ class ProfileView extends _reactDefault.default.Component {
                                 __self: this,
                                 children: [
                                     "Password: ",
-                                    `${this.state.Password}`
+                                    `${user.Password}`
                                 ]
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
@@ -40939,7 +40941,7 @@ class ProfileView extends _reactDefault.default.Component {
                                 __self: this,
                                 children: [
                                     "Email: ",
-                                    `${this.state.Email}`
+                                    `${user.Email}`
                                 ]
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Text, {
@@ -41052,7 +41054,10 @@ class UpdateView extends _reactDefault.default.Component {
             Username: "",
             Password: "",
             Email: "",
-            Birthday: ""
+            Birthday: "",
+            PasswordError: "",
+            EmailError: "",
+            BirthdayError: ""
         };
     }
     componentDidMount() {
@@ -41078,10 +41083,11 @@ class UpdateView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    /* Handle form update */ handleUpdate() {
+    /* User Info Update */ handleUpdate() {
         let token = localStorage.getItem("token");
         let user = localStorage.getItem("user");
-        _axiosDefault.default.put(`https://movietemple.herokuapp.com/users/update/${user}`, {
+        let validated = this.formValidation();
+        if (validated) _axiosDefault.default.put(`https://movietemple.herokuapp.com/users/update/${user}`, {
             Username: this.state.Username,
             Password: this.state.Password,
             Email: this.state.Email,
@@ -41101,12 +41107,44 @@ class UpdateView extends _reactDefault.default.Component {
             console.log("Error upon update");
         });
     }
+    /*Form Validation*/ formValidation() {
+        let EmailError = {
+        };
+        let PasswordError = {
+        };
+        let BirthdayError = {
+        };
+        let isValid = true;
+        if (this.state.Password.trim().length < 5 || this.state.Password === '') {
+            PasswordError.passwordMissing = "You must enter a password at least 5 characters long.";
+            isValid = false;
+        }
+        /*if (!(this.state.Email && this.state.Email.includes(".") && this.state.Email.includes("@"))) {
+          EmailError.emailNotEmail = "Your email doesn't look quite right.";
+          isValid = false;
+        }
+        if (this.state.Birthday === '' || !this.state.Birthday ) {
+          BirthdayError.BirthdayEmpty = "Please enter your date of birth.";
+          isValid = false;
+        }
+        this.setState({
+          PasswordError: PasswordError,
+          EmailError: EmailError,
+          BirthdayError: BirthdayError,
+        })*/ return isValid;
+    }
+    setField(e) {
+        let { name , value  } = e.target;
+        this.setState({
+            [name]: value
+        });
+    }
     render() {
         const { user  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/update-view/update-view.jsx",
-                lineNumber: 78
+                lineNumber: 118
             },
             __self: this,
             children: [
@@ -41114,13 +41152,13 @@ class UpdateView extends _reactDefault.default.Component {
                     className: "form-title justify-content-center",
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 79
+                        lineNumber: 119
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/update-view/update-view.jsx",
-                            lineNumber: 79
+                            lineNumber: 119
                         },
                         __self: this,
                         children: "Update your account information"
@@ -41129,7 +41167,7 @@ class UpdateView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 80
+                        lineNumber: 120
                     },
                     __self: this,
                     children: [
@@ -41137,14 +41175,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formUsername",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 81
+                                lineNumber: 121
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 82
+                                        lineNumber: 122
                                     },
                                     __self: this,
                                     children: "Username: "
@@ -41152,9 +41190,11 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "text",
                                     placeholder: "Username",
+                                    onChange: (e)=>this.setField(e)
+                                    ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 83
+                                        lineNumber: 123
                                     },
                                     __self: this
                                 })
@@ -41164,14 +41204,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formPassword",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 86
+                                lineNumber: 126
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 87
+                                        lineNumber: 127
                                     },
                                     __self: this,
                                     children: "Password: "
@@ -41179,9 +41219,11 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "text",
                                     placeholder: "Password",
+                                    onChange: (e)=>this.setField(e)
+                                    ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 88
+                                        lineNumber: 128
                                     },
                                     __self: this
                                 })
@@ -41191,14 +41233,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formEmail",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 91
+                                lineNumber: 131
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 92
+                                        lineNumber: 132
                                     },
                                     __self: this,
                                     children: "Email: "
@@ -41206,9 +41248,11 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "text",
                                     placeholder: "Email",
+                                    onChange: (e)=>this.setField(e)
+                                    ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 93
+                                        lineNumber: 133
                                     },
                                     __self: this
                                 })
@@ -41218,14 +41262,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formBirthdate",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 96
+                                lineNumber: 136
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 97
+                                        lineNumber: 137
                                     },
                                     __self: this,
                                     children: "Birthdate: "
@@ -41235,7 +41279,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     placeholder: "Email",
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 98
+                                        lineNumber: 138
                                     },
                                     __self: this
                                 })
@@ -41244,7 +41288,7 @@ class UpdateView extends _reactDefault.default.Component {
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 101
+                                lineNumber: 141
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
@@ -41253,7 +41297,7 @@ class UpdateView extends _reactDefault.default.Component {
                                 onClick: this.handleUpdate,
                                 __source: {
                                     fileName: "src/components/update-view/update-view.jsx",
-                                    lineNumber: 102
+                                    lineNumber: 142
                                 },
                                 __self: this,
                                 children: " Update "
@@ -41265,12 +41309,76 @@ class UpdateView extends _reactDefault.default.Component {
         }));
     }
 }
+UpdateView.propTypes = {
+    users: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string,
+        Email: _propTypesDefault.default.string.isRequired,
+        Password: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.string
+    })
+};
 
   $parcel$ReactRefreshHelpers$7299.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"6TuXu","react-bootstrap":"h2YVd","prop-types":"1tgq3","axios":"iYoWk","react-router-dom":"cpyQW","./update-view.scss":"kVYLP","@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7XgTt","react/jsx-runtime":"8xIwr"}],"kVYLP":[function() {},{}]},["g0Qq3","BnZU4","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react":"6TuXu","react-bootstrap":"h2YVd","prop-types":"1tgq3","axios":"iYoWk","react-router-dom":"cpyQW","./update-view.scss":"kVYLP","@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7XgTt","react/jsx-runtime":"8xIwr"}],"kVYLP":[function() {},{}],"cmbwR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "InvalidTokenError", ()=>n
+);
+function e(e1) {
+    this.message = e1;
+}
+e.prototype = new Error, e.prototype.name = "InvalidCharacterError";
+var r = "undefined" != typeof window && window.atob && window.atob.bind(window) || function(r1) {
+    var t = String(r1).replace(/=+$/, "");
+    if (t.length % 4 == 1) throw new e("'atob' failed: The string to be decoded is not correctly encoded.");
+    for(var n, o, a = 0, i = 0, c = ""; o = t.charAt(i++); ~o && (n = a % 4 ? 64 * n + o : o, (a++) % 4) && (c += String.fromCharCode(255 & n >> (-2 * a & 6))))o = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(o);
+    return c;
+};
+function t(e1) {
+    var t1 = e1.replace(/-/g, "+").replace(/_/g, "/");
+    switch(t1.length % 4){
+        case 0:
+            break;
+        case 2:
+            t1 += "==";
+            break;
+        case 3:
+            t1 += "=";
+            break;
+        default:
+            throw "Illegal base64url string!";
+    }
+    try {
+        return (function(e2) {
+            return decodeURIComponent(r(e2).replace(/(.)/g, function(e3, r1) {
+                var t2 = r1.charCodeAt(0).toString(16).toUpperCase();
+                return t2.length < 2 && (t2 = "0" + t2), "%" + t2;
+            }));
+        })(t1);
+    } catch (e2) {
+        return r(t1);
+    }
+}
+function n(e1) {
+    this.message = e1;
+}
+function o(e1, r1) {
+    if ("string" != typeof e1) throw new n("Invalid token specified");
+    var o1 = !0 === (r1 = r1 || {
+    }).header ? 0 : 1;
+    try {
+        return JSON.parse(t(e1.split(".")[o1]));
+    } catch (e2) {
+        throw new n("Invalid token specified: " + e2.message);
+    }
+}
+n.prototype = new Error, n.prototype.name = "InvalidTokenError";
+exports.default = o;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN"}]},["g0Qq3","BnZU4","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map

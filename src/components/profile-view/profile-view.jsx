@@ -109,9 +109,9 @@ export class ProfileView extends React.Component {
         <Card className="card" xs={8} md={4}>
                 <Card.Body className="card-body">
                     <Card.Title>Profile Information </Card.Title>
-                    <Card.Text>Username: {`${this.state.Username}`} </Card.Text>
-                    <Card.Text>Password: {`${this.state.Password}`}</Card.Text>
-                    <Card.Text>Email: {`${this.state.Email}`}</Card.Text>
+                    <Card.Text>Username: {`${user.Username}`} </Card.Text>
+                    <Card.Text>Password: {`${user.Password}`}</Card.Text>
+                    <Card.Text>Email: {`${user.Email}`}</Card.Text>
                     <Card.Text>Birthdate: {`${this.state.Birthdate}`}</Card.Text> 
                     <Link to={`/users/update/${user}`}>
                       <Button className="button-update" variant="link" onClick={() => {}}>Update Profile</Button>

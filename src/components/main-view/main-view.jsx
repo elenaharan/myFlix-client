@@ -10,7 +10,7 @@ import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { UpdateView } from '../update-view/update-view';
-
+import jwtDecode from "jwt-decode";
 
 //Importing React-Bootstrap Components
 import Row from 'react-bootstrap/Row';
@@ -42,7 +42,7 @@ export class MainView extends React.Component {
       let accessToken = localStorage.getItem('token');
       if (accessToken !== null) {
         this.setState({
-          user: localStorage.getItem('user')
+          user: jwtDecode(accessToken),
         });
         this.getMovies(accessToken);
         }

@@ -15,6 +15,9 @@ export class UpdateView extends React.Component {
       Password: "",
       Email: "",
       Birthday: "",
+      PasswordError: "",
+      EmailError: "",
+      BirthdayError: "",
     }
   }
 
@@ -46,10 +49,12 @@ export class UpdateView extends React.Component {
       });
   }
 
-/* Handle form update */
+/* User Info Update */
 handleUpdate() {
   let token = localStorage.getItem("token");
   let user = localStorage.getItem("user");
+  let validated = this.formValidation();
+    if (validated) {
   axios.put( `https://movietemple.herokuapp.com/users/update/${user}`,
         {   
             Username: this.state.Username,
@@ -71,6 +76,41 @@ handleUpdate() {
             console.log("Error upon update");
         });
       }
+    }
+
+      /*Form Validation*/
+      formValidation() {
+        let EmailError = {};
+        let PasswordError = {};
+        let BirthdayError = {};
+        let isValid = true;
+        if (this.state.Password.trim().length < 5 || this.state.Password === '') {
+          PasswordError.passwordMissing = "You must enter a password at least 5 characters long.";
+          isValid = false;
+        }
+        /*if (!(this.state.Email && this.state.Email.includes(".") && this.state.Email.includes("@"))) {
+          EmailError.emailNotEmail = "Your email doesn't look quite right.";
+          isValid = false;
+        }
+        if (this.state.Birthday === '' || !this.state.Birthday ) {
+          BirthdayError.BirthdayEmpty = "Please enter your date of birth.";
+          isValid = false;
+        }
+        this.setState({
+          PasswordError: PasswordError,
+          EmailError: EmailError,
+          BirthdayError: BirthdayError,
+        })*/
+        return isValid;
+      };
+
+
+    setField(e) {
+        let { name, value } = e.target;
+        this.setState({
+          [name]: value
+        })
+      }
 
   render() {
     const { user } = this.props;
@@ -80,17 +120,17 @@ handleUpdate() {
          <Form>
          <Form.Group controlid="formUsername">
           <Form.Label>Username: </Form.Label>
-          <Form.Control type="text" placeholder="Username"></Form.Control>
+          <Form.Control type="text" placeholder="Username" onChange={(e) => this.setField(e)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlid="formPassword">
           <Form.Label>Password: </Form.Label>
-          <Form.Control type="text" placeholder="Password"></Form.Control>
+          <Form.Control type="text" placeholder="Password" onChange={(e) => this.setField(e)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlid="formEmail">
           <Form.Label>Email: </Form.Label>
-          <Form.Control type="text" placeholder="Email"></Form.Control>
+          <Form.Control type="text" placeholder="Email" onChange={(e) => this.setField(e)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlid="formBirthdate">
@@ -107,3 +147,12 @@ handleUpdate() {
      );
   }
 }
+
+UpdateView.propTypes = {
+  users: PropTypes.shape({
+    Username: PropTypes.string,
+    Email: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Birthday: PropTypes.string,
+  })
+};
