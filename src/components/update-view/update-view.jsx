@@ -10,15 +10,16 @@ import './update-view.scss';
 export class UpdateView extends React.Component {
   constructor() {
     super();
+
     this.state = {
-      Username: "",
-      Password: "",
-      Email: "",
-      Birthday: "",
-      PasswordError: "",
-      EmailError: "",
-      BirthdayError: "",
-    }
+    
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthdate: null,
+      FavoriteMovies: [],
+      validated: null,
+    };
   }
 
   componentDidMount() {
@@ -39,8 +40,8 @@ export class UpdateView extends React.Component {
               Username: user,
               Password: response.data.Password,
               Email: response.data.Email,
-              Birthdate: response.data.Birthdate,
-              FavoriteMovies: response.data.FavoriteMovies,
+              //Birthdate: response.data.Birthdate,
+              //FavoriteMovies: response.data.FavoriteMovies,
               
           }); 
       })
@@ -50,7 +51,7 @@ export class UpdateView extends React.Component {
   }
 
 /* User Info Update */
-handleUpdate() {
+handleUpdate(e, newUsername, newPassword, newEmail) {
   let token = localStorage.getItem("token");
   let user = localStorage.getItem("user");
   let validated = this.formValidation();
@@ -60,7 +61,7 @@ handleUpdate() {
             Username: this.state.Username,
             Password: this.state.Password,
             Email: this.state.Email,
-            Birthday: this.state.Birthday
+            
         },
         { headers: { Authorization: `Bearer ${token}` } } 
       )
@@ -69,7 +70,7 @@ handleUpdate() {
             console.log(data);
             alert("Your account information has been updated.");
             console.log(response);
-            window.location.pathname = `{/users/${user}`;
+            window.location.pathname = `/users/profile/${user}`;
         })
         .catch(function (error) {
             alert(error.response.data);
@@ -80,9 +81,9 @@ handleUpdate() {
 
       /*Form Validation*/
       formValidation() {
-        let EmailError = {};
+        
         let PasswordError = {};
-        let BirthdayError = {};
+        
         let isValid = true;
         if (this.state.Password.trim().length < 5 || this.state.Password === '') {
           PasswordError.passwordMissing = "You must enter a password at least 5 characters long.";
@@ -113,7 +114,7 @@ handleUpdate() {
       }
 
   render() {
-    const { user } = this.props;
+    //const { user } = this.props;
      return (
        <Container>
          <Row className="form-title justify-content-center"><h4>Update your account information</h4></Row>
@@ -153,6 +154,6 @@ UpdateView.propTypes = {
     Username: PropTypes.string,
     Email: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
-    Birthday: PropTypes.string,
+    
   })
 };

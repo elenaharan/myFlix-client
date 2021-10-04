@@ -114,7 +114,7 @@ export class ProfileView extends React.Component {
                     <Card.Text>Email: {`${user.Email}`}</Card.Text>
                     <Card.Text>Birthdate: {`${this.state.Birthdate}`}</Card.Text> 
                     <Link to={`/users/update/${user}`}>
-                      <Button className="button-update" variant="link" onClick={() => {}}>Update Profile</Button>
+                      <Button className="button-update" variant="link" >Update Profile</Button>
                     </Link>
 
                     <Link to={`/users/${user}`}>
