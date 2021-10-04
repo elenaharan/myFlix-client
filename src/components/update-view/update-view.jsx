@@ -12,7 +12,6 @@ export class UpdateView extends React.Component {
     super();
 
     this.state = {
-    
       Username: null,
       Password: null,
       Email: null,

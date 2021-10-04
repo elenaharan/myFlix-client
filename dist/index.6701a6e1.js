@@ -41134,7 +41134,7 @@ class UpdateView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/update-view/update-view.jsx",
-                lineNumber: 119
+                lineNumber: 118
             },
             __self: this,
             children: [
@@ -41142,13 +41142,13 @@ class UpdateView extends _reactDefault.default.Component {
                     className: "form-title justify-content-center",
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 120
+                        lineNumber: 119
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/update-view/update-view.jsx",
-                            lineNumber: 120
+                            lineNumber: 119
                         },
                         __self: this,
                         children: "Update your account information"
@@ -41157,7 +41157,7 @@ class UpdateView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 121
+                        lineNumber: 120
                     },
                     __self: this,
                     children: [
@@ -41165,14 +41165,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formUsername",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 122
+                                lineNumber: 121
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 123
+                                        lineNumber: 122
                                     },
                                     __self: this,
                                     children: "Username: "
@@ -41184,7 +41184,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 124
+                                        lineNumber: 123
                                     },
                                     __self: this
                                 })
@@ -41194,14 +41194,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formPassword",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 127
+                                lineNumber: 126
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 128
+                                        lineNumber: 127
                                     },
                                     __self: this,
                                     children: "Password: "
@@ -41213,7 +41213,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 129
+                                        lineNumber: 128
                                     },
                                     __self: this
                                 })
@@ -41223,14 +41223,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formEmail",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 132
+                                lineNumber: 131
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 133
+                                        lineNumber: 132
                                     },
                                     __self: this,
                                     children: "Email: "
@@ -41242,7 +41242,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 134
+                                        lineNumber: 133
                                     },
                                     __self: this
                                 })
@@ -41252,14 +41252,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formBirthdate",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 137
+                                lineNumber: 136
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 138
+                                        lineNumber: 137
                                     },
                                     __self: this,
                                     children: "Birthdate: "
@@ -41269,7 +41269,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     placeholder: "Email",
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 139
+                                        lineNumber: 138
                                     },
                                     __self: this
                                 })
@@ -41278,7 +41278,7 @@ class UpdateView extends _reactDefault.default.Component {
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 142
+                                lineNumber: 141
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
@@ -41287,7 +41287,7 @@ class UpdateView extends _reactDefault.default.Component {
                                 onClick: this.handleUpdate,
                                 __source: {
                                     fileName: "src/components/update-view/update-view.jsx",
-                                    lineNumber: 143
+                                    lineNumber: 142
                                 },
                                 __self: this,
                                 children: " Update "
