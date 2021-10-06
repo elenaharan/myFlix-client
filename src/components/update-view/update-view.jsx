@@ -47,31 +47,24 @@ export class UpdateView extends React.Component {
   /*Update User Info*/
 handleUpdate(event) {
   event.preventDefault();
-  let token = localStorage.getItem('token');
-  let username = localStorage.getItem('user');
+  let token = window.localStorage.getItem('token');
+  let user = localStorage.getItem('user');
 
-  axios.put(`https://movietemple.herokuapp.com/users/update/${username}`, 
-  {
-    Password: this.state.Password,
-    Email: this.state.Email,
-    Birthdate: this.state.Birthdate
-  },
-    { headers: { Authorization: `Bearer ${token}`}}
-  )
-  .then((response) => {
-    alert("Changes saved");
-    this.setState({
-      Username: response.data.Username,
-      Password: response.data.Password,
-      Email: response.data.Email,
-      Birthdate: response.data.Birthdate,
-    });    
-    window.open(`/users/profile/${this.props.user}`, '_self');
-    })
-    .catch(function (error) {
-      alert(error.response.data);
-    });
-  }
+  axios.put(`https://movietemple.herokuapp.com/users/update/${user}`, { headers: { Authorization: `Bearer ${token}` },
+})
+ .then(response => this.setState({
+   Username: username,
+   Password: password,
+   Email: email,
+   Birthdate: birthdate,
+ }))
+ .then(response => {
+   return alert("Account has been updates");
+ })
+ .catch(error => {
+   console.error('There was an error!', error);
+ });
+}
 
 
   handleChangeUsername = event => {

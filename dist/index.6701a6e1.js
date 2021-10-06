@@ -41079,27 +41079,22 @@ class UpdateView extends _reactDefault.default.Component {
     }
     /*Update User Info*/ handleUpdate(event) {
         event.preventDefault();
-        let token = localStorage.getItem('token');
-        let username = localStorage.getItem('user');
-        _axiosDefault.default.put(`https://movietemple.herokuapp.com/users/update/${username}`, {
-            Password: this.state.Password,
-            Email: this.state.Email,
-            Birthdate: this.state.Birthdate
-        }, {
+        let token = window.localStorage.getItem('token');
+        let user = localStorage.getItem('user');
+        _axiosDefault.default.put(`https://movietemple.herokuapp.com/users/update/${user}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then((response)=>{
-            alert("Changes saved");
-            this.setState({
-                Username: response.data.Username,
-                Password: response.data.Password,
-                Email: response.data.Email,
-                Birthdate: response.data.Birthdate
-            });
-            window.open(`/users/profile/${this.props.user}`, '_self');
-        }).catch(function(error) {
-            alert(error.response.data);
+        }).then((response)=>this.setState({
+                Username: username,
+                Password: password,
+                Email: email,
+                Birthdate: birthdate
+            })
+        ).then((response)=>{
+            return alert("Account has been updates");
+        }).catch((error)=>{
+            console.error('There was an error!', error);
         });
     }
     handleChangeUsername = (event)=>{
@@ -41127,7 +41122,7 @@ class UpdateView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/update-view/update-view.jsx",
-                lineNumber: 98
+                lineNumber: 91
             },
             __self: this,
             children: [
@@ -41135,13 +41130,13 @@ class UpdateView extends _reactDefault.default.Component {
                     className: "form-title justify-content-center",
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 99
+                        lineNumber: 92
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/update-view/update-view.jsx",
-                            lineNumber: 99
+                            lineNumber: 92
                         },
                         __self: this,
                         children: "Update your account information"
@@ -41150,7 +41145,7 @@ class UpdateView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 100
+                        lineNumber: 93
                     },
                     __self: this,
                     children: [
@@ -41158,14 +41153,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formUsername",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 101
+                                lineNumber: 94
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 102
+                                        lineNumber: 95
                                     },
                                     __self: this,
                                     children: "Username: "
@@ -41177,7 +41172,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 103
+                                        lineNumber: 96
                                     },
                                     __self: this
                                 })
@@ -41187,14 +41182,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formPassword",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 106
+                                lineNumber: 99
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 107
+                                        lineNumber: 100
                                     },
                                     __self: this,
                                     children: "Password: "
@@ -41206,7 +41201,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 108
+                                        lineNumber: 101
                                     },
                                     __self: this
                                 })
@@ -41216,14 +41211,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formEmail",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 111
+                                lineNumber: 104
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 112
+                                        lineNumber: 105
                                     },
                                     __self: this,
                                     children: "Email: "
@@ -41235,7 +41230,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 113
+                                        lineNumber: 106
                                     },
                                     __self: this
                                 })
@@ -41245,14 +41240,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formBirthdate",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 116
+                                lineNumber: 109
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 117
+                                        lineNumber: 110
                                     },
                                     __self: this,
                                     children: "Birthdate: "
@@ -41264,7 +41259,7 @@ class UpdateView extends _reactDefault.default.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 118
+                                        lineNumber: 111
                                     },
                                     __self: this
                                 })
@@ -41273,7 +41268,7 @@ class UpdateView extends _reactDefault.default.Component {
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 121
+                                lineNumber: 114
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
@@ -41283,7 +41278,7 @@ class UpdateView extends _reactDefault.default.Component {
                                 ,
                                 __source: {
                                     fileName: "src/components/update-view/update-view.jsx",
-                                    lineNumber: 122
+                                    lineNumber: 115
                                 },
                                 __self: this,
                                 children: " Update "
