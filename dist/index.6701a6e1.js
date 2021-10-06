@@ -41045,25 +41045,23 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactRouterDom = require("react-router-dom");
 var _updateViewScss = require("./update-view.scss");
+var _themeProvider = require("react-bootstrap/esm/ThemeProvider");
 class UpdateView extends _reactDefault.default.Component {
     constructor(){
         super();
         this.state = {
-            Username: null,
-            Password: null,
-            Email: null,
-            Birthdate: null,
-            FavoriteMovies: [],
-            validated: null
+            username: '',
+            Password: '',
+            Email: '',
+            Birthdate: ''
         };
     }
     componentDidMount() {
-        let accessToken = localStorage.getItem('token');
+        let token = localStorage.getItem('token');
         let username = localStorage.getItem('user');
     }
-    //GET user
     getUser(token) {
-        let url = `https://movietemple.herokuapp.com/users/profile/${user}`;
+        let url = `https://movietemple.herokuapp.com/users/update/${user}`;
         _axiosDefault.default.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -41072,69 +41070,64 @@ class UpdateView extends _reactDefault.default.Component {
             this.setState({
                 Username: user,
                 Password: response.data.Password,
-                Email: response.data.Email
+                Email: response.data.Email,
+                Birthdate: response.data.Birthdate
             });
         }).catch(function(error) {
             console.log(error);
         });
     }
-    /* User Info Update */ handleUpdate(e, newUsername, newPassword, newEmail) {
-        let token = localStorage.getItem("token");
-        let user = localStorage.getItem("user");
-        let validated = this.formValidation();
-        if (validated) _axiosDefault.default.put(`https://movietemple.herokuapp.com/users/update/${user}`, {
-            Username: this.state.Username,
+    /*Update User Info*/ handleUpdate(event) {
+        event.preventDefault();
+        let token = localStorage.getItem('token');
+        let username = localStorage.getItem('user');
+        _axiosDefault.default.put(`https://movietemple.herokuapp.com/users/update/${username}`, {
             Password: this.state.Password,
-            Email: this.state.Email
+            Email: this.state.Email,
+            Birthdate: this.state.Birthdate
         }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
-            const data = response.data;
-            console.log(data);
-            alert("Your account information has been updated.");
-            console.log(response);
-            window.location.pathname = `/users/profile/${user}`;
+            alert("Changes saved");
+            this.setState({
+                Username: response.data.Username,
+                Password: response.data.Password,
+                Email: response.data.Email,
+                Birthdate: response.data.Birthdate
+            });
+            window.open(`/users/profile/${this.props.user}`, '_self');
         }).catch(function(error) {
             alert(error.response.data);
-            console.log("Error upon update");
         });
     }
-    /*Form Validation*/ formValidation() {
-        let PasswordError = {
-        };
-        let isValid = true;
-        if (this.state.Password.trim().length < 5 || this.state.Password === '') {
-            PasswordError.passwordMissing = "You must enter a password at least 5 characters long.";
-            isValid = false;
-        }
-        /*if (!(this.state.Email && this.state.Email.includes(".") && this.state.Email.includes("@"))) {
-          EmailError.emailNotEmail = "Your email doesn't look quite right.";
-          isValid = false;
-        }
-        if (this.state.Birthday === '' || !this.state.Birthday ) {
-          BirthdayError.BirthdayEmpty = "Please enter your date of birth.";
-          isValid = false;
-        }
+    handleChangeUsername = (event)=>{
         this.setState({
-          PasswordError: PasswordError,
-          EmailError: EmailError,
-          BirthdayError: BirthdayError,
-        })*/ return isValid;
-    }
-    setField(e) {
-        let { name , value  } = e.target;
-        this.setState({
-            [name]: value
+            username: event.target.value
         });
-    }
+    };
+    handleChangePassword = (event)=>{
+        this.setState({
+            password: event.target.value
+        });
+    };
+    handleChangeEmail = (event)=>{
+        this.setState({
+            email: event.target.value
+        });
+    };
+    handleChangeBirthdate = (event)=>{
+        this.setState({
+            birthdate: event.target.value
+        });
+    };
     render() {
-        //const { user } = this.props;
+        const { user  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/update-view/update-view.jsx",
-                lineNumber: 118
+                lineNumber: 98
             },
             __self: this,
             children: [
@@ -41142,13 +41135,13 @@ class UpdateView extends _reactDefault.default.Component {
                     className: "form-title justify-content-center",
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 119
+                        lineNumber: 99
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/update-view/update-view.jsx",
-                            lineNumber: 119
+                            lineNumber: 99
                         },
                         __self: this,
                         children: "Update your account information"
@@ -41157,7 +41150,7 @@ class UpdateView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 120
+                        lineNumber: 100
                     },
                     __self: this,
                     children: [
@@ -41165,14 +41158,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formUsername",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 121
+                                lineNumber: 101
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 122
+                                        lineNumber: 102
                                     },
                                     __self: this,
                                     children: "Username: "
@@ -41180,11 +41173,11 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "text",
                                     placeholder: "Username",
-                                    onChange: (e)=>this.setField(e)
+                                    onChange: (event)=>this.handleChangeUsername(event)
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 123
+                                        lineNumber: 103
                                     },
                                     __self: this
                                 })
@@ -41194,14 +41187,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formPassword",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 126
+                                lineNumber: 106
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 127
+                                        lineNumber: 107
                                     },
                                     __self: this,
                                     children: "Password: "
@@ -41209,11 +41202,11 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "text",
                                     placeholder: "Password",
-                                    onChange: (e)=>this.setField(e)
+                                    onChange: (event)=>this.handleChangePassword(event)
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 128
+                                        lineNumber: 108
                                     },
                                     __self: this
                                 })
@@ -41223,14 +41216,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formEmail",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 131
+                                lineNumber: 111
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 132
+                                        lineNumber: 112
                                     },
                                     __self: this,
                                     children: "Email: "
@@ -41238,11 +41231,11 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "text",
                                     placeholder: "Email",
-                                    onChange: (e)=>this.setField(e)
+                                    onChange: (event)=>this.handleChangeEmail(event)
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 133
+                                        lineNumber: 113
                                     },
                                     __self: this
                                 })
@@ -41252,24 +41245,26 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formBirthdate",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 136
+                                lineNumber: 116
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 137
+                                        lineNumber: 117
                                     },
                                     __self: this,
                                     children: "Birthdate: "
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "date",
-                                    placeholder: "Email",
+                                    placeholder: "Birthdate",
+                                    onChange: (event)=>this.handleChangeBirthdate(event)
+                                    ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 138
+                                        lineNumber: 118
                                     },
                                     __self: this
                                 })
@@ -41278,16 +41273,17 @@ class UpdateView extends _reactDefault.default.Component {
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 141
+                                lineNumber: 121
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                 variant: "secondary",
                                 type: "update",
-                                onClick: this.handleUpdate,
+                                onClick: (event)=>this.handleUpdate()
+                                ,
                                 __source: {
                                     fileName: "src/components/update-view/update-view.jsx",
-                                    lineNumber: 142
+                                    lineNumber: 122
                                 },
                                 __self: this,
                                 children: " Update "
@@ -41300,10 +41296,11 @@ class UpdateView extends _reactDefault.default.Component {
     }
 }
 UpdateView.propTypes = {
-    users: _propTypesDefault.default.shape({
+    user: _propTypesDefault.default.shape({
         Username: _propTypesDefault.default.string,
         Email: _propTypesDefault.default.string.isRequired,
-        Password: _propTypesDefault.default.string.isRequired
+        Password: _propTypesDefault.default.string.isRequired,
+        Birthdate: _propTypesDefault.default.string
     })
 };
 
@@ -41312,7 +41309,7 @@ UpdateView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"6TuXu","react-bootstrap":"h2YVd","prop-types":"1tgq3","axios":"iYoWk","react-router-dom":"cpyQW","./update-view.scss":"kVYLP","@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7XgTt","react/jsx-runtime":"8xIwr"}],"kVYLP":[function() {},{}],"cmbwR":[function(require,module,exports) {
+},{"react":"6TuXu","react-bootstrap":"h2YVd","prop-types":"1tgq3","axios":"iYoWk","react-router-dom":"cpyQW","./update-view.scss":"kVYLP","@parcel/transformer-js/src/esmodule-helpers.js":"3WCWN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7XgTt","react/jsx-runtime":"8xIwr","react-bootstrap/esm/ThemeProvider":"eeqfi"}],"kVYLP":[function() {},{}],"cmbwR":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "InvalidTokenError", ()=>n
