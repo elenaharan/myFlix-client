@@ -59,7 +59,7 @@ handleUpdate(event) {
    Birthdate: birthdate,
  }))
  .then(response => {
-   return alert("Account has been updates");
+   return alert("Account has been updated");
  })
  .catch(error => {
    console.error('There was an error!', error);
@@ -86,7 +86,10 @@ handleUpdate(event) {
   
 
   render() {
+    
     const { user } = this.props;
+    
+
      return (
        <Container>
          <Row className="form-title justify-content-center"><h4>Update your account information</h4></Row>
@@ -112,7 +115,7 @@ handleUpdate(event) {
         </Form.Group>
 
         <Row>
-        <Button variant="secondary" type="update" onClick={(event) => this.handleUpdate()}> Update </Button>
+        <Button variant="secondary" type="update" username = {user} onClick={(event) => this.handleUpdate()}> Update </Button>
         </Row>
 
          </Form>
