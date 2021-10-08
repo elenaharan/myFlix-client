@@ -26,6 +26,7 @@ export class MovieView extends React.Component {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
+        alert(`${this.props.movie.Title} has been added to your favourites`);
         this.setState({
           favoriteMovies: response.data.FavoriteMovies,
         });
@@ -49,6 +50,7 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie } = this.props;
+    const user = localStorage.getItem("user");
     return (
       <div className="movie-view">
         <Row xs={12} md={6} className="movie-poster justify-content-center">
@@ -82,28 +84,24 @@ export class MovieView extends React.Component {
         </Row>
 
         <Row>
-          <Link to={"/users/profile/:Username"}>
-            <Button
-              block
-              type="button"
-              variant="success"
-              onClick={() => this.handleAdd()}
-            >
-              Add to favorites
-            </Button>
-          </Link>
+          <Button
+            block
+            type="button"
+            variant="success"
+            onClick={() => this.handleAdd()}
+          >
+            Add to favorites
+          </Button>
         </Row>
         <Row>
-          <Link to={`/movies/${movie.Title}`}>
-            <Button
-              block
-              type="button"
-              variant="danger"
-              onClick={() => this.handleRemove(movie)}
-            >
-              Remove from favorites
-            </Button>
-          </Link>
+          <Button
+            block
+            type="button"
+            variant="danger"
+            onClick={() => this.handleRemove(movie)}
+          >
+            Remove from favorites
+          </Button>
         </Row>
       </div>
     );

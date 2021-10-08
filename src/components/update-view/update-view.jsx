@@ -115,7 +115,7 @@ handleUpdate(event) {
         </Form.Group>
 
         <Row>
-        <Button variant="secondary" type="update" username = {user} onClick={(event) => this.handleUpdate()}> Update </Button>
+        <Button variant="secondary" type="submit" username = {user} onClick={(event) => this.handleUpdate()}> Update </Button>
         </Row>
 
          </Form>
