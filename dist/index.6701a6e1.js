@@ -23296,7 +23296,8 @@ let mapStateToProps = (state)=>{
     };
 };
 exports.default = _reactRedux.connect(mapStateToProps, {
-    setMovies: _actions.setMovies
+    setMovies: _actions.setMovies,
+    setFilter: _actions.setFilter
 })(MainView);
 
   $parcel$ReactRefreshHelpers$35bf.postlude(module);
@@ -42657,7 +42658,7 @@ const mapStateToProps = (state)=>{
 function MoviesList(props) {
     const { movies , visibilityFilter  } = props;
     let filteredMovies = movies;
-    if (visibilityFilter == true) filteredMovies = movies.filter((m)=>movie.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
+    if (visibilityFilter == true) filteredMovies = movies.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
     );
     if (!movies) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
         className: "main-view",
