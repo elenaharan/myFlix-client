@@ -5,6 +5,14 @@
   text-align: center;
   color: #324851;
   background-color: #F1F1F2;
+  padding: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.logout-button {
+  position: relative;
+  margin-left: 9%;
 }
 Form {
   max-width: 50%;
@@ -17,14 +25,19 @@ Form {
 }
 
 .card {
+  width: 110%;
   height: 100%;
-  justify-content: space-around;
+  padding-bottom: 5px;
+  margin-top: 20px;
 }
 
 .button {
   position: absolute;
-  bottom: 0;
-  center: 0;
+  bottom: 0px;
+}
+
+.card-image {
+  height: 250px;
 }
 .movie-poster {
   justify-content: center;
@@ -34,4 +47,57 @@ Form {
   justify-content: center;
 }
 
+.movie-view {
+  margin-top: -40px;
+  margin-bottom: 2px;
+  width: 100%;
+  height: auto;
+}
+
+.movie-director {
+  margin-bottom: 0px;
+}
+
+.director-bio {
+  margin: 40px;
+  line-height: 30px;
+}
+
+.other-movies {
+  padding-top: 100px;
+}
+
+.card-director {
+  width: 10px;
+}
+
+.movieCard-wrapper {
+  width: 50%;
+}
+.genre-name {
+  margin: 20px;
+}
+
+.genre-description {
+  margin: 40px;
+  line-height: 30px;
+}
+
+.back-button {
+  margin: 40px;
+}
+
+.genre-card {
+  width: 35%;
+}
+.button {
+  justify-content: center;
+}
+
+.header-favourites {
+  margin: 40px;
+}
+.update-header {
+  margin: 0px;
+}
 /*# sourceMappingURL=index.caa67093.css.map */
