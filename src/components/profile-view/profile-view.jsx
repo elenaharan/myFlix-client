@@ -84,6 +84,9 @@ export class ProfileView extends React.Component {
             </Link>
           </Card.Body>
         </Card>
+        <Row className="justify-content-center">
+          <h3>Favourite Films</h3>
+        </Row>
        {movies.map((movie) => {
           if (this.state.FavoriteMovies.includes(movie._id)) {
             return <MovieCard key={movie._id} movie={movie} />;
