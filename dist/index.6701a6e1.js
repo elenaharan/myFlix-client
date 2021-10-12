@@ -23224,13 +23224,14 @@ class MainView extends _reactDefault.default.Component {
                                 if (movies.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     className: "main-view"
                                 }));
-                                const genreMovies = movies.find((movie)=>{
+                                const genreMovies = movies.filter((movie)=>{
                                     return movie.Genre.Name === match.params.name;
                                 });
                                 return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                     md: 8,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_genreView.GenreView, {
                                         movies: genreMovies,
+                                        movieId: match.params.movieId,
                                         genre: movies.find((m)=>m.Genre.Name === match.params.name
                                         ).Genre,
                                         onBackClick: ()=>history.goBack()
@@ -23261,7 +23262,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 282
+                                lineNumber: 283
                             },
                             __self: this
                         }),
@@ -23280,7 +23281,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 305
+                                lineNumber: 306
                             },
                             __self: this
                         })
@@ -41917,13 +41918,16 @@ var _movieCard = require("../movie-card/movie-card");
 var _movieCardDefault = parcelHelpers.interopDefault(_movieCard);
 class GenreView extends _reactDefault.default.Component {
     render() {
-        const { genre , movies  } = this.props;
+        const { genre , movies , movie , movieId  } = this.props;
+        const validMovies = movies.filter((movie1)=>movie1._id !== movieId
+        );
+        const shouldRenderMovies = validMovies.length > 0;
         console.log("movies", movies);
         return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "genre-view",
             __source: {
                 fileName: "src/components/genre-view/genre-view.jsx",
-                lineNumber: 23
+                lineNumber: 24
             },
             __self: this,
             children: [
@@ -41931,13 +41935,13 @@ class GenreView extends _reactDefault.default.Component {
                     className: "genre-name justify-content-center",
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 25
+                        lineNumber: 26
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h3", {
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 25
+                            lineNumber: 26
                         },
                         __self: this,
                         children: genre.Name
@@ -41947,41 +41951,43 @@ class GenreView extends _reactDefault.default.Component {
                     className: "genre-description",
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 27
+                        lineNumber: 28
                     },
                     __self: this,
                     children: genre.Description
                 }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                shouldRenderMovies && /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
                     className: "other-movies justify-content-center",
-                    __source: {
-                        fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 29
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
-                        __source: {
-                            fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 29
-                        },
-                        __self: this,
-                        children: "Other Movies in this Genre"
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-                    className: "genre-card",
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
                         lineNumber: 31
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCardDefault.default, {
-                        movie: movies,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 33
+                            lineNumber: 31
                         },
-                        __self: this
+                        __self: this,
+                        children: "Other Movies in this Genre"
+                    })
+                }),
+                shouldRenderMovies && /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "genre-card",
+                    __source: {
+                        fileName: "src/components/genre-view/genre-view.jsx",
+                        lineNumber: 34
+                    },
+                    __self: this,
+                    children: validMovies.map((movie1)=>{
+                        return(/*#__PURE__*/ _jsxRuntime.jsx(_movieCardDefault.default, {
+                            movie: movie1,
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 36
+                            },
+                            __self: this
+                        }, movie1._id));
                     })
                 })
             ]
@@ -42208,15 +42214,23 @@ class ProfileView extends _reactDefault.default.Component {
                         children: "Favourite Films"
                     })
                 }),
-                movies.map((movie)=>{
-                    if (this.state.FavoriteMovies.includes(movie._id)) return(/*#__PURE__*/ _jsxRuntime.jsx(_movieCardDefault.default, {
-                        movie: movie,
-                        __source: {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 94
-                        },
-                        __self: this
-                    }, movie._id));
+                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                    className: "favourite-movies",
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 92
+                    },
+                    __self: this,
+                    children: movies.map((movie)=>{
+                        if (this.state.FavoriteMovies.includes(movie._id)) return(/*#__PURE__*/ _jsxRuntime.jsx(_movieCardDefault.default, {
+                            movie: movie,
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 95
+                            },
+                            __self: this
+                        }, movie._id));
+                    })
                 })
             ]
         }));

@@ -97,6 +97,10 @@ Form {
 .header-favourites {
   margin: 40px;
 }
+
+.favourite-movies {
+  width: 50%;
+}
 .update-header {
   margin: 0px;
 }

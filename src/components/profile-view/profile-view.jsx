@@ -89,11 +89,13 @@ export class ProfileView extends React.Component {
         <Row className="justify-content-center">
           <h3>Favourite Films</h3>
         </Row>
+        <Row className="favourite-movies">
        {movies.map((movie) => {
           if (this.state.FavoriteMovies.includes(movie._id)) {
             return <MovieCard key={movie._id} movie={movie} />;
           }
         })}
+        </Row>
       </Container>
     );
   }

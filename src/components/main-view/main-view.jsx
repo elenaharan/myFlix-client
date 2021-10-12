@@ -260,13 +260,14 @@ class MainView extends React.Component {
                   </Col>
                 );
               if (movies.length === 0) return <div className="main-view" />;
-              const genreMovies = movies.find((movie) => {
+              const genreMovies = movies.filter((movie) => {
                 return movie.Genre.Name === match.params.name;
               });
               return (
                 <Col md={8}>
                   <GenreView
                     movies={genreMovies}
+                    movieId = {match.params.movieId} 
                     genre={
                       movies.find((m) => m.Genre.Name === match.params.name)
                         .Genre
