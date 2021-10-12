@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import "./login-view.scss";
 import { Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 export function LoginView(props) {
     const [ username, setUsername ] = useState('');
@@ -45,30 +46,23 @@ export function LoginView(props) {
           </Form.Group>
           </Row>
 
-          <Row>
+          <Row>            
             <Button variant="primary" type="submit" onClick={handleSubmit}>
           Login
             </Button>
-          </Row>
-
-          <Row>
-          {'Haven\'t got an account?'}
-        </Row>
-
-          <Row>
+          
             <Link to="/register">
               <Button variant="success link">Register</Button>
             </Link>
+          
           </Row>
         </Form> 
       </div>  
     );
 }
 
-LoginView.propTypes = {
-    Login: propTypes.shape({
-        Username: propTypes.string.isRequired,
-        Password: propTypes.string.isRequired
-    }),
-    onLoggedIn: propTypes.func.isRequired
-};
+const mapDispatchToProps = (dispatch) => ({
+  handleSubmit: (username, password) => dispatch(handleSubmit(username, password))
+});
+
+export default connect(null, mapDispatchToProps)(LoginView);

@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
+import { connect } from 'react-redux';
+import { setUser, updateUser } from '../../actions/actions';
 import { default as MovieCard } from "../movie-card/movie-card";
 import "./profile-view.scss";
 export class ProfileView extends React.Component {
@@ -96,3 +98,12 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return {
+    user: setate.user,
+    movies: state.movies
+  }
+}
+
+export default connect(mapStateToProps, {setUser, updateUser})(ProfileView);
