@@ -42672,7 +42672,7 @@ const mapStateToProps = (state)=>{
 function MoviesList(props) {
     const { movies , visibilityFilter  } = props;
     let filteredMovies = movies;
-    if (visibilityFilter == true) filteredMovies = movies.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
+    if (visibilityFilter !== '') filteredMovies = movies.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
     );
     if (!movies) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
         className: "main-view",
