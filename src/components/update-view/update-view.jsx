@@ -2,6 +2,8 @@ import React from 'react';
 import {Row, Col, Button, Container, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { updateUser } from '../../actions/actions';
 
 import { Link } from 'react-router-dom';
 
@@ -123,11 +125,11 @@ handleUpdate(event) {
      );
   }}
 
-  UpdateView.propTypes = {
-    user: PropTypes.shape({
-      Username: PropTypes.string,
-      Email: PropTypes.string.isRequired,
-      Password: PropTypes.string.isRequired,
-      Birthdate: PropTypes.string,
-    })
-  };
+ let mapStateToProps = state => {
+   return {
+     user: state.user,
+     movies: state.movies
+   }
+ }
+
+ export default connect(mapStateToProps, { updateUser })(UpdateView);

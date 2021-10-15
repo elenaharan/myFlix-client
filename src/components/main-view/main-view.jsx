@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { connect } from 'react-redux';
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, setFilter } from '../../actions/actions';
 
 //Importing React Components
 import { MoviesList} from '../movies-list/movies-list';
@@ -260,13 +260,14 @@ class MainView extends React.Component {
                   </Col>
                 );
               if (movies.length === 0) return <div className="main-view" />;
-              const genreMovies = movies.find((movie) => {
+              const genreMovies = movies.filter((movie) => {
                 return movie.Genre.Name === match.params.name;
               });
               return (
                 <Col md={8}>
                   <GenreView
                     movies={genreMovies}
+                    movieId = {match.params.movieId} 
                     genre={
                       movies.find((m) => m.Genre.Name === match.params.name)
                         .Genre
@@ -324,4 +325,4 @@ let mapStateToProps = state => {
   return { movies: state.movies }
 }
 
-export default connect(mapStateToProps, { setMovies }) (MainView);
+export default connect(mapStateToProps, { setMovies, setFilter }) (MainView);

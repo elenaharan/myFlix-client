@@ -11,8 +11,9 @@ import {default as MovieCard} from '../movie-card/movie-card';
 export class GenreView extends React.Component {
     
     render() {  
-      const { genre, movies } = this.props;
-      
+      const { genre, movies, movie, movieId } = this.props;
+      const validMovies = movies.filter((movie) => movie._id !== movieId);
+      const shouldRenderMovies = validMovies.length > 0;   
 
       console.log("movies", movies);
       
@@ -26,15 +27,16 @@ export class GenreView extends React.Component {
 
           <Row className="genre-description">{genre.Description}</Row>
 
+          {shouldRenderMovies && (
           <Row className="other-movies justify-content-center"><h4>Other Movies in this Genre</h4></Row>
-
+          )}
+          {shouldRenderMovies && (
           <Row className="genre-card">
-          
-            <MovieCard  movie={movies}/>
+            {validMovies.map((movie) => {
+              return <MovieCard key={movie._id} movie={movie} />;
+            })}
           </Row>       
-          
-      
-         
+          )}       
         </div>
     );
   }
