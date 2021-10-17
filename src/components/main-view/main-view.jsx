@@ -130,9 +130,12 @@ class MainView extends React.Component {
           <Container>
             <Navbar expand="lg" variant="light" bg="light">
               <Navbar.Brand href="/">MovieTemple</Navbar.Brand>
-              <Navbar.Brand href={`/users/profile/${user}`}>
+              
+              {user && ( 
+                <Navbar.Brand href={`/users/profile/${user.Username}`}>
                 Profile
-              </Navbar.Brand>
+              </Navbar.Brand> )}
+              
               <button
                 onClick={() => {
                   this.onLoggedOut();

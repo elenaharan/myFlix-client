@@ -66,7 +66,7 @@ export class ProfileView extends React.Component {
             <Card.Text>Password: {`${user.Password}`}</Card.Text>
             <Card.Text>Email: {`${user.Email}`}</Card.Text>
             <Card.Text>Birthdate: {`${this.state.Birthdate}`}</Card.Text>
-            <Link to={`/users/update/${user}`}>
+            <Link to={`/users/update/${user.Username}`}>
               <Button className="button-update" variant="link">
                 Update Profile
               </Button>
@@ -103,7 +103,7 @@ export class ProfileView extends React.Component {
 
 let mapStateToProps = state => {
   return {
-    user: setate.user,
+    user: state.user,
     movies: state.movies
   }
 }
