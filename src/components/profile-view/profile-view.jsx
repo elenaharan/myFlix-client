@@ -21,7 +21,7 @@ export class ProfileView extends React.Component {
   //GET user
   componentDidMount() {
     let user = localStorage.getItem("user");
-    let url = `https://movietemple.herokuapp.com/users/profile/${user.Username}`;
+    let url = `https://movietemple.herokuapp.com/users/profile/${user}`;
     console.log("getting user");
     const token = localStorage.getItem("token");
 
