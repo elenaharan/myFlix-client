@@ -25,16 +25,16 @@ export class UpdateView extends React.Component {
 
   componentDidMount() {
     let token = localStorage.getItem('token');
-    let username = localStorage.getItem('user');
+    let username = localStorage.getItem('user.Username');
   }
 
   getUser(token) {
-    let url = `https://movietemple.herokuapp.com/users/update/${user}`;
+    let url = `https://movietemple.herokuapp.com/users/update/${user.Username}`;
     axios.get(url, {headers: {Authorization: `Bearer ${token}`},
   })
   .then((response) => {
     this.setState({
-      Username: user,
+      Username: user.Username,
       Password: response.data.Password,
       Email: response.data.Email,
       Birthdate: response.data.Birthdate,
@@ -50,15 +50,16 @@ export class UpdateView extends React.Component {
 handleUpdate(event) {
   event.preventDefault();
   let token = window.localStorage.getItem('token');
-  let user = localStorage.getItem('user');
+  let {user} = this.state;
+  console.log("get user", user);
 
-  axios.put(`https://movietemple.herokuapp.com/users/update/${user}`, { headers: { Authorization: `Bearer ${token}` },
+  axios.put(`https://movietemple.herokuapp.com/users/update/${user.Username}`, { headers: { Authorization: `Bearer ${token}` },
 })
  .then(response => this.setState({
-   Username: username,
-   Password: password,
-   Email: email,
-   Birthdate: birthdate,
+   Username: user.Username,
+   Password: user.Password,
+   Email: user.Email,
+   Birthdate: user.Birthdate,
  }))
  .then(response => {
    return alert("Account has been updated");
@@ -90,6 +91,7 @@ handleUpdate(event) {
   render() {
     
     const { user } = this.props;
+    console.log("is this working?", user)
     
 
      return (
