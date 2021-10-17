@@ -42055,7 +42055,7 @@ class ProfileView extends _reactDefault.default.Component {
     //GET user
     componentDidMount() {
         let user = localStorage.getItem("user");
-        let url = `https://movietemple.herokuapp.com/users/profile/${user}`;
+        let url = `https://movietemple.herokuapp.com/users/profile/${user.Username}`;
         console.log("getting user");
         const token = localStorage.getItem("token");
         _axiosDefault.default.get(url, {
