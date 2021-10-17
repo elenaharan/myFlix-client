@@ -23060,14 +23060,23 @@ class MainView extends _reactDefault.default.Component {
                                     __self: this,
                                     children: "MovieTemple"
                                 }),
-                                user && /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Brand, {
+                                user && /*#__PURE__*/ _jsxRuntime.jsxs(_navbarDefault.default.Brand, {
                                     href: `/users/profile/${user.Username}`,
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
                                         lineNumber: 135
                                     },
                                     __self: this,
-                                    children: "Profile"
+                                    children: [
+                                        "Profile ",
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
+                                            __source: {
+                                                fileName: "src/components/main-view/main-view.jsx",
+                                                lineNumber: 136
+                                            },
+                                            __self: this
+                                        })
+                                    ]
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx("button", {
                                     onClick: ()=>{
