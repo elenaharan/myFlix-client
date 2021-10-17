@@ -133,7 +133,7 @@ class MainView extends React.Component {
               
               {user && ( 
                 <Navbar.Brand href={`/users/profile/${user.Username}`}>
-                Profile
+                Profile <ProfileView />
               </Navbar.Brand> )}
               
               <button
