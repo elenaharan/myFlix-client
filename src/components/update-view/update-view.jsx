@@ -50,16 +50,22 @@ export class UpdateView extends React.Component {
 handleUpdate(event) {
   event.preventDefault();
   let token = window.localStorage.getItem('token');
-  let {user} = this.state;
+  const updatedUser = {
+    Username: this.state.username,
+   Password: this.state.Password,
+   Email: this.state.Email,
+   Birthdate: this.state.Birthdate,
+  }
   console.log("get user", user);
+  console.log("event", event);
 
-  axios.put(`https://movietemple.herokuapp.com/users/update/${user.Username}`, { headers: { Authorization: `Bearer ${token}` },
+  axios.put(`https://movietemple.herokuapp.com/users/update/${updatedUser.Username}`, updatedUser, { headers: { Authorization: `Bearer ${token}` },
 })
  .then(response => this.setState({
-   Username: user.Username,
-   Password: user.Password,
-   Email: user.Email,
-   Birthdate: user.Birthdate,
+   Username: updatedUser.Username,
+   Password: updatedUser.Password,
+   Email: updatedUser.Email,
+   Birthday: updatedUser.Birthdate,
  }))
  .then(response => {
    return alert("Account has been updated");

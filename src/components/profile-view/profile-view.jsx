@@ -22,7 +22,6 @@ export class ProfileView extends React.Component {
   componentDidMount() {
     let user = localStorage.getItem("user");
     let url = `https://movietemple.herokuapp.com/users/profile/${user}`;
-    console.log("getting user");
     const token = localStorage.getItem("token");
 
     axios
@@ -56,6 +55,7 @@ export class ProfileView extends React.Component {
     
     const { user, username, movies } = this.props;
     console.log("movies", movies);
+    console.log("log user", user);
 
     return (
       <Container>
@@ -65,7 +65,7 @@ export class ProfileView extends React.Component {
             <Card.Text>Username: {`${user.Username}`} </Card.Text>
             <Card.Text>Password: {`${user.Password}`}</Card.Text>
             <Card.Text>Email: {`${user.Email}`}</Card.Text>
-            <Card.Text>Birthdate: {`${this.state.Birthdate}`}</Card.Text>
+            {user.Birthday && <Card.Text>Birthdate: {`${user.Birthday}`}</Card.Text>}
             <Link to={`/users/update/${user.Username}`}>
               <Button className="button-update" variant="link">
                 Update Profile
