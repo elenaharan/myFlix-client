@@ -122,6 +122,7 @@ class MainView extends React.Component {
   render() {
     let { movies } = this.props;
     let { user } = this.state;
+    console.log("user", user);
     
 
     return (
@@ -133,7 +134,7 @@ class MainView extends React.Component {
               
               {user && ( 
                 <Navbar.Brand href={`/users/profile/${user.Username}`}>
-                Profile <ProfileView />
+                Profile
               </Navbar.Brand> )}
               
               <button
