@@ -16,7 +16,7 @@ export class UpdateView extends React.Component {
 
     this.state = {
       
-      username: '',
+      Username: '',
       Password: '',
       Email: '',
       Birthdate: '',
@@ -25,19 +25,21 @@ export class UpdateView extends React.Component {
 
   componentDidMount() {
     let token = localStorage.getItem('token');
-    let username = localStorage.getItem('user.Username');
+    let username = localStorage.getItem('user');
+    this.getUser(token, username);
   }
 
-  getUser(token) {
-    let url = `https://movietemple.herokuapp.com/users/update/${user.Username}`;
+  getUser(token, username) {
+    let url = `https://movietemple.herokuapp.com/users/profile/${username}`;
     axios.get(url, {headers: {Authorization: `Bearer ${token}`},
   })
   .then((response) => {
+    console.log("response", response);
     this.setState({
-      Username: user.Username,
+      Username: response.data.Username,
       Password: response.data.Password,
       Email: response.data.Email,
-      Birthdate: response.data.Birthdate,
+      Birthdate: response.data.Birthday,
     });
   })
   .catch(function (error) {
@@ -51,16 +53,15 @@ handleUpdate(event) {
   event.preventDefault();
   let token = window.localStorage.getItem('token');
   const updatedUser = {
-    Username: this.state.username,
+   Username: this.state.Username,
    Password: this.state.Password,
    Email: this.state.Email,
    Birthdate: this.state.Birthdate,
   }
-  console.log("get user", user);
+  console.log("get user", updatedUser);
   console.log("event", event);
 
-  axios.put(`https://movietemple.herokuapp.com/users/update/${updatedUser.Username}`, updatedUser, { headers: { Authorization: `Bearer ${token}` },
-})
+  axios.put(`https://movietemple.herokuapp.com/users/update/${updatedUser.Username}`, updatedUser, { headers: { Authorization: `Bearer ${token}` }})
  .then(response => this.setState({
    Username: updatedUser.Username,
    Password: updatedUser.Password,
@@ -77,28 +78,26 @@ handleUpdate(event) {
 
 
   handleChangeUsername = event => {
-    this.setState({username: event.target.value})
+    this.setState({Username: event.target.value})
   };
 
   handleChangePassword = event => {
-    this.setState({password: event.target.value})
+    this.setState({Password: event.target.value})
   };
 
   handleChangeEmail = event => {
-    this.setState({email: event.target.value})
+    this.setState({Email: event.target.value})
   };
 
   handleChangeBirthdate = event => {
-    this.setState({birthdate: event.target.value})
+    this.setState({Birthdate: event.target.value})
   };
 
   
 
   render() {
     
-    const { user } = this.props;
-    console.log("is this working?", user)
-    
+    const { Username, Password, Email, Birthdate } = this.state;
 
      return (
        <Container>
@@ -106,26 +105,26 @@ handleUpdate(event) {
          <Form>
          <Form.Group controlid="formUsername">
           <Form.Label>Username: </Form.Label>
-          <Form.Control type="text" placeholder="Username" onChange={(event) => this.handleChangeUsername(event)} ></Form.Control>
+          <Form.Control type="text" placeholder="Username" value={Username} onChange={(event) => this.handleChangeUsername(event)} ></Form.Control>
         </Form.Group>
 
         <Form.Group controlid="formPassword">
           <Form.Label>Password: </Form.Label>
-          <Form.Control type="text" placeholder="Password" onChange={(event) => this.handleChangePassword(event)}></Form.Control>
+          <Form.Control type="password" placeholder="Password" defaultValue={Password} onChange={(event) => this.handleChangePassword(event)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlid="formEmail">
           <Form.Label>Email: </Form.Label>
-          <Form.Control type="text" placeholder="Email" onChange={(event) => this.handleChangeEmail(event)}></Form.Control>
+          <Form.Control type="text" placeholder="Email" defaultValue={Email} onChange={(event) => this.handleChangeEmail(event)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlid="formBirthdate">
           <Form.Label>Birthdate: </Form.Label>
-          <Form.Control type="date" placeholder="Birthdate" onChange={(event) => this.handleChangeBirthdate(event)}></Form.Control>
+          <Form.Control type="date" placeholder="Birthdate" defaultValue={Birthdate} onChange={(event) => this.handleChangeBirthdate(event)}></Form.Control>
         </Form.Group>
 
         <Row>
-        <Button variant="secondary" type="submit" username = {user} onClick={(event) => this.handleUpdate()}> Update </Button>
+        <Button variant="secondary" type="submit" onClick={(event) => this.handleUpdate(event)}> Update </Button>
         </Row>
 
          </Form>
