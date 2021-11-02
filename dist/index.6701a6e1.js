@@ -42253,7 +42253,7 @@ exports.default = _reactRedux.connect(mapStateToProps, {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Row":"c0x1x","react-bootstrap/Container":"2PRIq","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW","react-bootstrap/Card":"MoOk8","axios":"iYoWk","react-redux":"2L0if","../../actions/actions":"1Ttfj","../movie-card/movie-card":"6EiBJ","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"1Ttfj":[function(require,module,exports) {
+},{"react":"6TuXu","axios":"iYoWk","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react/jsx-runtime":"8xIwr","react-bootstrap/Row":"c0x1x","react-bootstrap/Container":"2PRIq","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","react-bootstrap/Button":"9CzHT","../movie-card/movie-card":"6EiBJ","react-redux":"2L0if","../../actions/actions":"1Ttfj"}],"gb0ga":[function() {},{}],"1Ttfj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "SET_MOVIES", ()=>SET_MOVIES
@@ -42305,7 +42305,7 @@ function updateUser(value) {
     };
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"gb0ga":[function() {},{}],"8jXgg":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"8jXgg":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$7299 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42333,7 +42333,7 @@ class UpdateView extends _reactDefault.default.Component {
     constructor(){
         super();
         this.state = {
-            username: '',
+            Username: '',
             Password: '',
             Email: '',
             Birthdate: ''
@@ -42341,20 +42341,22 @@ class UpdateView extends _reactDefault.default.Component {
     }
     componentDidMount() {
         let token = localStorage.getItem('token');
-        let username = localStorage.getItem('user.Username');
+        let username = localStorage.getItem('user');
+        this.getUser(token, username);
     }
-    getUser(token) {
-        let url = `https://movietemple.herokuapp.com/users/update/${user.Username}`;
+    getUser(token, username) {
+        let url = `https://movietemple.herokuapp.com/users/profile/${username}`;
         _axiosDefault.default.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
+            console.log("response", response);
             this.setState({
-                Username: user.Username,
+                Username: response.data.Username,
                 Password: response.data.Password,
                 Email: response.data.Email,
-                Birthdate: response.data.Birthdate
+                Birthdate: response.data.Birthday
             });
         }).catch(function(error) {
             console.log(error);
@@ -42364,12 +42366,12 @@ class UpdateView extends _reactDefault.default.Component {
         event.preventDefault();
         let token = window.localStorage.getItem('token');
         const updatedUser = {
-            Username: this.state.username,
+            Username: this.state.Username,
             Password: this.state.Password,
             Email: this.state.Email,
             Birthdate: this.state.Birthdate
         };
-        console.log("get user", user);
+        console.log("get user", updatedUser);
         console.log("event", event);
         _axiosDefault.default.put(`https://movietemple.herokuapp.com/users/update/${updatedUser.Username}`, updatedUser, {
             headers: {
@@ -42389,31 +42391,30 @@ class UpdateView extends _reactDefault.default.Component {
     }
     handleChangeUsername = (event)=>{
         this.setState({
-            username: event.target.value
+            Username: event.target.value
         });
     };
     handleChangePassword = (event)=>{
         this.setState({
-            password: event.target.value
+            Password: event.target.value
         });
     };
     handleChangeEmail = (event)=>{
         this.setState({
-            email: event.target.value
+            Email: event.target.value
         });
     };
     handleChangeBirthdate = (event)=>{
         this.setState({
-            birthdate: event.target.value
+            Birthdate: event.target.value
         });
     };
     render() {
-        const { user  } = this.props;
-        console.log("is this working?", user);
+        const { Username , Password , Email , Birthdate  } = this.state;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/update-view/update-view.jsx",
-                lineNumber: 104
+                lineNumber: 103
             },
             __self: this,
             children: [
@@ -42421,13 +42422,13 @@ class UpdateView extends _reactDefault.default.Component {
                     className: "form-title justify-content-center",
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 105
+                        lineNumber: 104
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
                         __source: {
                             fileName: "src/components/update-view/update-view.jsx",
-                            lineNumber: 105
+                            lineNumber: 104
                         },
                         __self: this,
                         children: "Update your account information"
@@ -42436,7 +42437,7 @@ class UpdateView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                     __source: {
                         fileName: "src/components/update-view/update-view.jsx",
-                        lineNumber: 106
+                        lineNumber: 105
                     },
                     __self: this,
                     children: [
@@ -42444,14 +42445,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formUsername",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 107
+                                lineNumber: 106
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 108
+                                        lineNumber: 107
                                     },
                                     __self: this,
                                     children: "Username: "
@@ -42459,11 +42460,12 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "text",
                                     placeholder: "Username",
+                                    value: Username,
                                     onChange: (event)=>this.handleChangeUsername(event)
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 109
+                                        lineNumber: 108
                                     },
                                     __self: this
                                 })
@@ -42473,26 +42475,27 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formPassword",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 112
+                                lineNumber: 111
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 113
+                                        lineNumber: 112
                                     },
                                     __self: this,
                                     children: "Password: "
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                    type: "text",
+                                    type: "password",
                                     placeholder: "Password",
+                                    defaultValue: Password,
                                     onChange: (event)=>this.handleChangePassword(event)
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 114
+                                        lineNumber: 113
                                     },
                                     __self: this
                                 })
@@ -42502,14 +42505,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formEmail",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 117
+                                lineNumber: 116
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 118
+                                        lineNumber: 117
                                     },
                                     __self: this,
                                     children: "Email: "
@@ -42517,11 +42520,12 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "text",
                                     placeholder: "Email",
+                                    defaultValue: Email,
                                     onChange: (event)=>this.handleChangeEmail(event)
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 119
+                                        lineNumber: 118
                                     },
                                     __self: this
                                 })
@@ -42531,14 +42535,14 @@ class UpdateView extends _reactDefault.default.Component {
                             controlid: "formBirthdate",
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 122
+                                lineNumber: 121
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 123
+                                        lineNumber: 122
                                     },
                                     __self: this,
                                     children: "Birthdate: "
@@ -42546,11 +42550,12 @@ class UpdateView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                     type: "date",
                                     placeholder: "Birthdate",
+                                    defaultValue: Birthdate,
                                     onChange: (event)=>this.handleChangeBirthdate(event)
                                     ,
                                     __source: {
                                         fileName: "src/components/update-view/update-view.jsx",
-                                        lineNumber: 124
+                                        lineNumber: 123
                                     },
                                     __self: this
                                 })
@@ -42559,18 +42564,17 @@ class UpdateView extends _reactDefault.default.Component {
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                             __source: {
                                 fileName: "src/components/update-view/update-view.jsx",
-                                lineNumber: 127
+                                lineNumber: 126
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                 variant: "secondary",
                                 type: "submit",
-                                username: user,
-                                onClick: (event)=>this.handleUpdate()
+                                onClick: (event)=>this.handleUpdate(event)
                                 ,
                                 __source: {
                                     fileName: "src/components/update-view/update-view.jsx",
-                                    lineNumber: 128
+                                    lineNumber: 127
                                 },
                                 __self: this,
                                 children: " Update "
