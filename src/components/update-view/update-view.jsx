@@ -30,7 +30,7 @@ export class UpdateView extends React.Component {
   }
 
   getUser(token, username) {
-    let url = `https://movietemple.herokuapp.com/users/profile/${username}`;
+    let url = `https://movietemple.herokuapp.com/users/profile/${user}`;
     axios.get(url, {headers: {Authorization: `Bearer ${token}`},
   })
   .then((response) => {
