@@ -130,7 +130,7 @@ class MainView extends React.Component {
         <Row>
           <Container>
             <Navbar expand="lg" variant="light" bg="light">
-              <Navbar.Brand href="/">MovieTemple</Navbar.Brand>
+              <Navbar.Brand href="/">myFlix</Navbar.Brand>
               
               {user && ( 
                 <Navbar.Brand href={`/users/profile/${user.Username}`}>
@@ -162,7 +162,7 @@ class MainView extends React.Component {
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   </Col>
                 );
-
+              //empty div is rendered while fetching process takes place
               if (movies.length === 0) return <div className="main-view" />;
               return <MoviesList movies={movies}/>; 
             }} />

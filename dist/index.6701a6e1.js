@@ -23059,7 +23059,7 @@ class MainView extends _reactDefault.default.Component {
                                         lineNumber: 133
                                     },
                                     __self: this,
-                                    children: "MovieTemple"
+                                    children: "myFlix"
                                 }),
                                 user && /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Brand, {
                                     href: `/users/profile/${user.Username}`,
@@ -23102,6 +23102,7 @@ class MainView extends _reactDefault.default.Component {
                                         onLoggedIn: (user1)=>this.onLoggedIn(user1)
                                     })
                                 }));
+                                //empty div is rendered while fetching process takes place
                                 if (movies.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     className: "main-view"
                                 }));
@@ -42345,7 +42346,7 @@ class UpdateView extends _reactDefault.default.Component {
         this.getUser(token, username);
     }
     getUser(token, username) {
-        let url = `https://movietemple.herokuapp.com/users/profile/${username}`;
+        let url = `https://movietemple.herokuapp.com/users/profile/${user}`;
         _axiosDefault.default.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`
